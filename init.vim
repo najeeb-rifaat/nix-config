@@ -16,9 +16,13 @@ Plug 'airblade/vim-gitgutter'
 Plug 'itchyny/lightline.vim'
 Plug 'junegunn/goyo.vim', { 'for': 'markdown' }
 Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
+Plug 'mxw/vim-jsx', { 'for': ['javascript', 'jsx' ] }
 Plug 'w0rp/ale', { 'for': 'javascript' }
 Plug 'maximbaz/lightline-ale'
+Plug 'Yggdroot/indentLine'
 Plug 'janko-m/vim-test'
+Plug 'heavenshell/vim-jsdoc'
+Plug 'othree/jspc.vim'
 
 call plug#end()
 
@@ -65,6 +69,16 @@ set tabstop=2
 " Highlight search matches
 set hlsearch
 
+" Ignore case when searching
+set ignorecase
+
+" When searching try to be smart about cases
+set smartcase
+
+
+" Return to last edit position when opening files (You want this!)
+au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
+
 " Delete white space on-save
 autocmd BufWritePre * :%s/\s\+$//e
 
@@ -73,6 +87,17 @@ set showcmd
 
 " => Set soft scroll (have few lines before / after cursor on screen)
 set scrolloff=1
+
+" => Hide mode --INSERT-- (rely on lightline for mode flag)
+set noshowmode
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Files, backups and undo
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Turn backup off, since most stuff is in SVN, git et.c anyway...
+set nobackup
+set nowb
+set noswapfile
 
 """"""""""""""""""""""""""""""""""""""""""""""
 " Najeeb Key mapping
@@ -87,15 +112,28 @@ map <right> <nop>
 map <space> /
 map <c-space> ?
 
+" Better new line
+nmap <CR> O<Esc>
+
 " Set <leader> key
 let mapleader="\\"
+
+" Save File
+map <leader>w :w<CR>
+
+" Buffer Control
+map <leader>' :bn<CR>
+map <leader>; :bp<CR>
+
+" Tab Control
+map <leader>n :tabnew<CR>
+map <leader>q :tabclose<CR>
+map <leader>] :tabnext<CR>
+map <leader>[ :tabprevious<CR>
 
 " Pane resize
 map <leader>, :vertical resize +5<CR>
 map <leader>. :vertical resize -5<CR>
-
-" Better new line
-nmap <CR> o<Esc>
 
 """"""""""""""""""""""""""""""""""""""""""""""
 " Deoplete setting (Autocompleter)
@@ -170,9 +208,68 @@ let g:lightline = {
       \ },
       \ }
 
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => ALE Setting
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Auto completion:
+let g:ale_completion_enabled = 1
+
+" => Auto fix on save:
+let g:ale_fix_on_save = 1
+
+" => ERROR/Warning color
+highlight ALEError ctermbg=DarkRed
+highlight ALEWarning ctermbg=DarkMagenta
+
+" => Signs
+let g:ale_sign_error = '✕'
+let g:ale_sign_warning = '⚠'
+
+" => set lightline info
+let g:lightline.component_expand = {
+  \  'linter_warnings': 'lightline#ale#warnings',
+  \  'linter_errors': 'lightline#ale#errors',
+  \  'linter_ok': 'lightline#ale#ok',
+  \ }
+
+let g:lightline.component_type = {
+  \     'linter_warnings': 'warning',
+  \     'linter_errors': 'error',
+  \ }
+
+" => Show errors in LightLine:
+let g:ale_echo_msg_error_str = 'E'
+let g:ale_echo_msg_warning_str = 'W'
+let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
+
 """"""""""""""""""""""""""""""""""""""""""""""
 " VIM Test setting
 """"""""""""""""""""""""""""""""""""""""""""""
 nnoremap <C-t> :TestNearest<CR>
 nnoremap <C-t-t> :TestFile<CR>
 
+""""""""""""""""""""""""""""""""""""""""""""""
+" General Setting
+""""""""""""""""""""""""""""""""""""""""""""""
+" Enable JSX for js and other file types
+let g:jsx_ext_required = 0
+
+""""""""""""""""""""""""""""""""""""""""""""""
+" Better Vim Diff
+""""""""""""""""""""""""""""""""""""""""""""""
+" => VIMDiff
+highlight DiffChange cterm=none ctermfg=fg ctermbg=DarkGreen gui=none guifg=fg guibg=DarkGreen
+
+" => Better Diffs
+if &diff
+    let &diffexpr='EnhancedDiff#Diff("git diff", "--diff-algorithm=patience")'
+endif
+
+""""""""""""""""""""""""""""""""""""""""""""""
+" Javascript Document plugin setting
+""""""""""""""""""""""""""""""""""""""""""""""
+let g:jsdoc_enable_es6 = 1
+let g:jsdoc_input_description = 1
+let g:jsdoc_allow_input_prompt = 1
+let g:jsdoc_return = 1
+let g:jsdoc_return_type = 1
