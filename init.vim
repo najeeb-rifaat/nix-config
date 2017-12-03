@@ -257,13 +257,8 @@ let g:jsx_ext_required = 0
 """"""""""""""""""""""""""""""""""""""""""""""
 " Better Vim Diff
 """"""""""""""""""""""""""""""""""""""""""""""
-" => VIMDiff
+" => Set Colors for vim Diff
 highlight DiffChange cterm=none ctermfg=fg ctermbg=DarkGreen gui=none guifg=fg guibg=DarkGreen
-
-" => Better Diffs
-if &diff
-    let &diffexpr='EnhancedDiff#Diff("git diff", "--diff-algorithm=patience")'
-endif
 
 """"""""""""""""""""""""""""""""""""""""""""""
 " Javascript Document plugin setting
