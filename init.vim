@@ -75,7 +75,6 @@ set ignorecase
 " When searching try to be smart about cases
 set smartcase
 
-
 " Return to last edit position when opening files (You want this!)
 au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 
@@ -124,25 +123,32 @@ nmap <CR> O<Esc>
 " Set <leader> key
 let mapleader="\\"
 
-" Save File
+" Save File mapping
 map <leader>w :w<CR>
 
-" Buffer Control
+" Buffer Control mapping
 map <leader>' :bn<CR>
 map <leader>; :bp<CR>
 
-" Tab Control
+" Tab Control mapping
 map <leader>n :tabnew<CR>
 map <leader>q :tabclose<CR>
 map <leader>] :tabnext<CR>
 map <leader>[ :tabprevious<CR>
 
-" Pane resize
+" Pane resize mapping
 map <leader>, :vertical resize +5<CR>
 map <leader>. :vertical resize -5<CR>
 
+" JS Doc mapping
+nmap <leader>d :JsDoc<CR>
+
+" VIM Test mapping
+nnoremap <C-t> :TestNearest<CR>
+nnoremap <C-t-t> :TestFile<CR>
+
 """"""""""""""""""""""""""""""""""""""""""""""
-" Deoplete setting (Autocompleter)
+" Deoplete setting (Autocomplete)
 """"""""""""""""""""""""""""""""""""""""""""""
 " Enable on startup
 let g:deoplete#enable_at_startup = 1
@@ -247,12 +253,6 @@ let g:lightline.component_type = {
 let g:ale_echo_msg_error_str = 'E'
 let g:ale_echo_msg_warning_str = 'W'
 let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
-
-""""""""""""""""""""""""""""""""""""""""""""""
-" VIM Test setting
-""""""""""""""""""""""""""""""""""""""""""""""
-nnoremap <C-t> :TestNearest<CR>
-nnoremap <C-t-t> :TestFile<CR>
 
 """"""""""""""""""""""""""""""""""""""""""""""
 " JSX setting
