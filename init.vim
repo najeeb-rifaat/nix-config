@@ -91,6 +91,9 @@ set scrolloff=1
 " Hide mode --INSERT-- (rely on lightline for mode flag)
 set noshowmode
 
+" Set Autofold to DISABLED
+set nofoldenable
+
 " Set default folding method
 set foldmethod=syntax
 
