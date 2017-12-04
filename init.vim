@@ -32,7 +32,7 @@ call plug#end()
 " Set Default encoding
 set encoding=utf8
 
-" => Set language for spelling
+" Set language for spelling
 set spell spelllang=en
 
 " Enable Nerd Fonts (Patched)
@@ -50,19 +50,19 @@ set colorcolumn=90
 " Enable Line number (Hybrid)
 set number relativenumber
 
-" => Enable Auto Indentation
+" Enable Auto Indentation
 filetype indent on
 filetype plugin indent on
 set smartindent
 set autoindent
 
-" => Use spaces instead of tabs
+" Use spaces instead of tabs
 set expandtab
 
-" => Be smart when using tabs ;)
+" Be smart when using tabs ;)
 set smarttab
 
-" => 1 tab == 4 spaces
+" Set Tab setting (1 tab == 2 spaces)
 set shiftwidth=2
 set tabstop=2
 
@@ -82,17 +82,20 @@ au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g
 " Delete white space on-save
 autocmd BufWritePre * :%s/\s\+$//e
 
-" => Show keys
+" Show keys
 set showcmd
 
-" => Set soft scroll (have few lines before / after cursor on screen)
+" Set soft scroll (have few lines before / after cursor on screen)
 set scrolloff=1
 
-" => Hide mode --INSERT-- (rely on lightline for mode flag)
+" Hide mode --INSERT-- (rely on lightline for mode flag)
 set noshowmode
 
+" Set default folding method
+set foldmethod=syntax
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Files, backups and undo
+" Files, backups and undo
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Turn backup off, since most stuff is in SVN, git et.c anyway...
 set nobackup
@@ -102,13 +105,13 @@ set noswapfile
 """"""""""""""""""""""""""""""""""""""""""""""
 " Najeeb Key mapping
 """"""""""""""""""""""""""""""""""""""""""""""
-" => Disable arrow keys
+" Disable arrow keys
 map <up> <nop>
 map <down> <nop>
 map <left> <nop>
 map <right> <nop>
 
-" => Map <Space> to / (search) and Ctrl-<Space> to ? (backwards search)
+" Map <Space> to / (search) and Ctrl-<Space> to ? (backwards search)
 map <space> /
 map <c-space> ?
 
@@ -170,25 +173,25 @@ let g:ctrlp_bufname_mod = ':t'
 """"""""""""""""""""""""""""""""""""""""""""""
 autocmd StdinReadPre * let s:std_in=1
 
-" => Auto open nerd tree for directories
+" Auto open nerd tree for directories
 autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | endif
 
-" => Map Ctrl - N to toggle nerd tree
+" Map Ctrl - N to toggle nerd tree
 map <C-n> :NERDTreeToggle<CR>
 
-" => Show hidden files
+" Show hidden files
 let NERDTreeShowHidden = 1
 
-" => Ignore system files
+" Ignore system files
 let NERDTreeIgnore=['\.DS_Store', '\~$', '\.swp']
 
 """"""""""""""""""""""""""""""""""""""""""""""
 " Light Line setting
 """"""""""""""""""""""""""""""""""""""""""""""
-" => Show LightLine always
+" Show LightLine always
 set laststatus=2
 
-" => LightLine:
+" LightLine:
 let g:lightline = {
       \ 'colorscheme': 'wombat',
       \ 'active': {
@@ -209,23 +212,23 @@ let g:lightline = {
       \ }
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => ALE Setting
+" ALE Setting
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Auto completion:
+" Auto completion:
 let g:ale_completion_enabled = 1
 
-" => Auto fix on save:
+" Auto fix on save:
 let g:ale_fix_on_save = 1
 
-" => ERROR/Warning color
+" ERROR/Warning color
 highlight ALEError ctermbg=DarkRed
 highlight ALEWarning ctermbg=DarkMagenta
 
-" => Signs
+" Signs
 let g:ale_sign_error = '✕'
 let g:ale_sign_warning = '⚠'
 
-" => set lightline info
+" set lightline info
 let g:lightline.component_expand = {
   \  'linter_warnings': 'lightline#ale#warnings',
   \  'linter_errors': 'lightline#ale#errors',
@@ -237,7 +240,7 @@ let g:lightline.component_type = {
   \     'linter_errors': 'error',
   \ }
 
-" => Show errors in LightLine:
+" Show errors in LightLine:
 let g:ale_echo_msg_error_str = 'E'
 let g:ale_echo_msg_warning_str = 'W'
 let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
@@ -249,7 +252,7 @@ nnoremap <C-t> :TestNearest<CR>
 nnoremap <C-t-t> :TestFile<CR>
 
 """"""""""""""""""""""""""""""""""""""""""""""
-" General Setting
+" JSX setting
 """"""""""""""""""""""""""""""""""""""""""""""
 " Enable JSX for js and other file types
 let g:jsx_ext_required = 0
@@ -257,7 +260,7 @@ let g:jsx_ext_required = 0
 """"""""""""""""""""""""""""""""""""""""""""""
 " Better Vim Diff
 """"""""""""""""""""""""""""""""""""""""""""""
-" => Set Colors for vim Diff
+" Set Colors for vim Diff
 highlight DiffChange cterm=none ctermfg=fg ctermbg=DarkGreen gui=none guifg=fg guibg=DarkGreen
 
 """"""""""""""""""""""""""""""""""""""""""""""
