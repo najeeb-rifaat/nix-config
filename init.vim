@@ -143,9 +143,12 @@ map <leader>. :vertical resize -5<CR>
 " JS Doc mapping
 nmap <leader>d :JsDoc<CR>
 
-" VIM Test mapping
+" Test mapping
 nnoremap <C-t> :TestNearest<CR>
 nnoremap <C-t-t> :TestFile<CR>
+
+" System Clipboard mapping
+vmap <C-c> "+y
 
 """"""""""""""""""""""""""""""""""""""""""""""
 " Deoplete setting (Autocomplete)
