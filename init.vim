@@ -9,6 +9,7 @@ Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'carlitux/deoplete-ternjs', { 'do': 'npm install -g tern' }
 Plug 'ervandew/supertab'
 Plug 'ctrlpvim/ctrlp.vim'
+Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 Plug 'ryanoasis/vim-devicons', { 'on': 'NERDTreeToggle' }
 Plug 'Xuyuanp/nerdtree-git-plugin'
@@ -17,6 +18,7 @@ Plug 'itchyny/lightline.vim'
 Plug 'junegunn/goyo.vim', { 'for': 'markdown' }
 Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
 Plug 'mxw/vim-jsx', { 'for': ['javascript', 'jsx' ] }
+Plug 'jparise/vim-graphql', { 'for': 'gql' }
 Plug 'w0rp/ale', { 'for': 'javascript' }
 Plug 'maximbaz/lightline-ale'
 Plug 'Yggdroot/indentLine'
@@ -129,10 +131,10 @@ map <leader>w :w<CR>
 " Buffer Control mapping
 map <leader>' :bn<CR>
 map <leader>; :bp<CR>
+map <leader>q :q!<CR>
 
 " Tab Control mapping
 map <leader>n :tabnew<CR>
-map <leader>q :tabclose<CR>
 map <leader>] :tabnext<CR>
 map <leader>[ :tabprevious<CR>
 
@@ -143,12 +145,9 @@ map <leader>. :vertical resize -5<CR>
 " JS Doc mapping
 nmap <leader>d :JsDoc<CR>
 
-" Test mapping
+" VIM Test mapping
 nnoremap <C-t> :TestNearest<CR>
 nnoremap <C-t-t> :TestFile<CR>
-
-" System Clipboard mapping
-vmap <C-c> "+y
 
 """"""""""""""""""""""""""""""""""""""""""""""
 " Deoplete setting (Autocomplete)
@@ -174,20 +173,21 @@ let g:ctrlp_custom_ignore = {
 " Set working path to nearest root
 let g:ctrlp_working_path_mode = 'ra'
 
-" Enable Lazy mode (Dont fucking search untill i stop !)
-let g:ctrlp_lazy_update = 1
+" Enable Lazy mode (Do NOT fucking search until I stop for 500ms)
+let g:ctrlp_lazy_update = 500
 
 " Set buffer mode to search file name
 let g:ctrlp_bufname_mod = ':t'
 
+" Set maych window location and behaviour
+let g:ctrlp_match_window = 'bottom,order:btt,min:5,max:25,results:25'
+
+" Set Max depth of tested directories to search
+let g:ctrlp_max_depth = 15
+
 """"""""""""""""""""""""""""""""""""""""""""""
 " NERDTree Setting
 """"""""""""""""""""""""""""""""""""""""""""""
-autocmd StdinReadPre * let s:std_in=1
-
-" Auto open nerd tree for directories
-autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | endif
-
 " Map Ctrl - N to toggle nerd tree
 map <C-n> :NERDTreeToggle<CR>
 
@@ -205,7 +205,7 @@ set laststatus=2
 
 " LightLine:
 let g:lightline = {
-      \ 'colorscheme': 'wombat',
+      \ 'colorscheme': 'wombat256i',
       \ 'active': {
       \   'left': [
       \				[ 'mode', 'paste' ],
@@ -214,7 +214,7 @@ let g:lightline = {
       \	  'right':[
       \				[ 'lineinfo' ],
       \				[ 'percent' ],
-      \				[ 'fileformat', 'fileencoding', 'filetype', 'charvaluehex' ],
+      \				[ 'fileencoding', 'filetype', 'charvaluehex' ],
       \				[ 'linter_errors', 'linter_warnings', 'linter_ok' ]
       \			]
       \ },
