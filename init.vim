@@ -89,7 +89,7 @@ set showcmd
 " Set soft scroll (have few lines before / after cursor on screen)
 set scrolloff=1
 
-" Hide mode --INSERT-- (rely on lightline for mode flag)
+" Hide mode --INSERT-- (rely on LightLine for mode flag)
 set noshowmode
 
 " Set Autofold to DISABLED
@@ -101,7 +101,7 @@ set foldmethod=syntax
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Files, backups and undo
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Turn backup off, since most stuff is in SVN, git et.c anyway...
+" Turn backup off, since most stuff is in xvn, git et.c anyway...
 set nobackup
 set nowb
 set noswapfile
@@ -179,7 +179,7 @@ let g:ctrlp_lazy_update = 500
 " Set buffer mode to search file name
 let g:ctrlp_bufname_mod = ':t'
 
-" Set maych window location and behaviour
+" Set match window location and behaviour
 let g:ctrlp_match_window = 'bottom,order:btt,min:5,max:25,results:25'
 
 " Set Max depth of tested directories to search
@@ -240,7 +240,7 @@ highlight ALEWarning ctermbg=DarkMagenta
 let g:ale_sign_error = '✕'
 let g:ale_sign_warning = '⚠'
 
-" set lightline info
+" set LightLine info
 let g:lightline.component_expand = {
   \  'linter_warnings': 'lightline#ale#warnings',
   \  'linter_errors': 'lightline#ale#errors',
