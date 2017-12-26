@@ -205,7 +205,7 @@ set laststatus=2
 
 " LightLine:
 let g:lightline = {
-      \ 'colorscheme': 'wombat256',
+      \ 'colorscheme': 'wombat',
       \ 'active': {
       \   'left': [
       \				[ 'mode', 'paste' ],
