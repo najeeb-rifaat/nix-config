@@ -1,6 +1,7 @@
 """"""""""""""""""""""""""""""""""""""""""""""
 " Functions
 """"""""""""""""""""""""""""""""""""""""""""""
+" Copy rights go to https://github.com/wincent/wincent
 function! s:Visual()
   return visualmode() == 'V'
 endfunction
