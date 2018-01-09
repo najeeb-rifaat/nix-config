@@ -37,3 +37,6 @@ tmux
 clickable
 Plugins
 plugins
+autoload
+nvim
+steup
