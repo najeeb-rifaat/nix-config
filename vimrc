@@ -117,6 +117,7 @@ set nofoldenable
 " Set default folding method
 set foldmethod=syntax
 
+let g:SuperTabClosePreviewOnPopupClose = 1
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Files, backups and undo
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -171,14 +172,21 @@ nnoremap <C-t-t> :TestFile<CR>
 " Move VISUAL LINE selection within buffer.
 xnoremap <silent> K :call najeeb#functions#move_selection_up()<CR>
 xnoremap <silent> J :call najeeb#functions#move_selection_down()<CR>
+
 """"""""""""""""""""""""""""""""""""""""""""""
 " Deoplete setting (Autocomplete)
 """"""""""""""""""""""""""""""""""""""""""""""
 " Enable on startup
 let g:deoplete#enable_at_startup = 1
+
+""""""""""""""""""""""""""""""""""""""""""""""
+" Tern-Deoplete setting (Autocomplete)
+""""""""""""""""""""""""""""""""""""""""""""""
+let g:deoplete#sources#ternjs#docs = 1
 let g:deoplete#sources#ternjs#types = 1
 let g:deoplete#sources#ternjs#depths = 1
 let g:deoplete#sources#ternjs#case_insensitive = 1
+let g:deoplete#sources#ternjs#include_keywords = 1
 
 """"""""""""""""""""""""""""""""""""""""""""""
 " CTRL P setting

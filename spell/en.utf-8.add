@@ -40,3 +40,5 @@ plugins
 autoload
 nvim
 steup
+Linting
+CLang
