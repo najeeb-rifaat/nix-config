@@ -3,28 +3,47 @@
 """"""""""""""""""""""""""""""""""""""""""""""
 call plug#begin('~/.local/share/nvim/plugged')
 
-Plug 'flazz/vim-colorschemes'
-Plug 'tpope/vim-fugitive'
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-Plug 'carlitux/deoplete-ternjs', { 'do': 'npm install -g tern' }
-Plug 'ervandew/supertab'
-Plug 'ctrlpvim/ctrlp.vim'
-Plug 'scrooloose/nerdcommenter'
-Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
-Plug 'ryanoasis/vim-devicons', { 'on': 'NERDTreeToggle' }
-Plug 'Xuyuanp/nerdtree-git-plugin'
-Plug 'airblade/vim-gitgutter'
-Plug 'itchyny/lightline.vim'
-Plug 'junegunn/goyo.vim', { 'for': 'markdown' }
-Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
-Plug 'mxw/vim-jsx', { 'for': ['javascript', 'jsx' ] }
-Plug 'jparise/vim-graphql', { 'for': 'gql' }
-Plug 'w0rp/ale', { 'for': 'javascript' }
-Plug 'maximbaz/lightline-ale'
-Plug 'Yggdroot/indentLine'
 Plug 'janko-m/vim-test'
-Plug 'heavenshell/vim-jsdoc'
+Plug 'ervandew/supertab'
+Plug 'tpope/vim-fugitive'
+Plug 'ctrlpvim/ctrlp.vim'
+Plug 'Yggdroot/indentLine'
+Plug 'itchyny/lightline.vim'
+Plug 'ryanoasis/vim-devicons'
+Plug 'airblade/vim-gitgutter'
+
+" Colors
+Plug 'flazz/vim-colorschemes'
+
+" File manager
+Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
+Plug 'Xuyuanp/nerdtree-git-plugin', { 'on':  'NERDTreeToggle' }
+
+" Autocomplete
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+
+" Linting
+Plug 'w0rp/ale', { 'for': [ 'javascript', 'c' ] }
+Plug 'maximbaz/lightline-ale'
+
+" CLang
+Plug 'tweekmonster/deoplete-clang2', { 'for': 'c' }
+
+" JS
 Plug 'othree/jspc.vim'
+Plug 'heavenshell/vim-jsdoc'
+Plug 'mxw/vim-jsx', { 'for': ['javascript', 'jsx' ] }
+Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
+Plug 'carlitux/deoplete-ternjs', { 'do': 'npm install -g tern', 'for': 'javascript' }
+
+" GQL
+Plug 'jparise/vim-graphql', { 'for': 'gql' }
+
+" Markdown
+Plug 'junegunn/goyo.vim', { 'for': 'markdown' }
+
+" Comments
+Plug 'scrooloose/nerdcommenter'
 
 call plug#end()
 
