@@ -27,7 +27,13 @@ Plug 'w0rp/ale', { 'for': [ 'javascript', 'c' ] }
 Plug 'maximbaz/lightline-ale'
 
 " CLang
-Plug 'tweekmonster/deoplete-clang2', { 'for': 'c' }
+if has('macunix')
+  Plug 'zchee/deoplete-clang', { 'for': 'c' }
+  let g:deoplete#sources#clang#libclang_path='/Library/Developer/CommandLineTools/usr/lib/libclang.dylib'
+  let g:deoplete#sources#clang#clang_header='/Library/Developer/CommandLineTools/usr/lib/clang/9.0.0/'
+else
+  Plug 'tweekmonster/deoplete-clang2', { 'for': 'c' }
+endif
 
 " JS
 Plug 'othree/jspc.vim'
@@ -117,7 +123,11 @@ set nofoldenable
 " Set default folding method
 set foldmethod=syntax
 
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Supertab setting
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:SuperTabClosePreviewOnPopupClose = 1
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Files, backups and undo
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
