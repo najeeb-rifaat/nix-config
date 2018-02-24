@@ -5,12 +5,16 @@ call plug#begin('~/.local/share/nvim/plugged')
 
 Plug 'janko-m/vim-test'
 Plug 'ervandew/supertab'
-Plug 'tpope/vim-fugitive'
 Plug 'ctrlpvim/ctrlp.vim'
-Plug 'Yggdroot/indentLine'
 Plug 'itchyny/lightline.vim'
 Plug 'ryanoasis/vim-devicons'
 Plug 'airblade/vim-gitgutter'
+
+" Color testers
+Plug 'guns/xterm-color-table.vim'
+
+" Plugin for git management
+Plug 'tpope/vim-fugitive'
 
 " Colors
 Plug 'flazz/vim-colorschemes'
@@ -18,38 +22,29 @@ Plug 'flazz/vim-colorschemes'
 " File manager
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 Plug 'Xuyuanp/nerdtree-git-plugin', { 'on':  'NERDTreeToggle' }
+Plug 'low-ghost/nerdtree-fugitive', { 'on':  'NERDTreeToggle' }
 
 " Autocomplete
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 
 " Linting
-Plug 'w0rp/ale', { 'for': [ 'javascript', 'c' ] }
+Plug 'w0rp/ale'
 Plug 'maximbaz/lightline-ale'
 
-" CLang
-if has('macunix')
-  Plug 'zchee/deoplete-clang', { 'for': 'c' }
-  let g:deoplete#sources#clang#libclang_path='/Library/Developer/CommandLineTools/usr/lib/libclang.dylib'
-  let g:deoplete#sources#clang#clang_header='/Library/Developer/CommandLineTools/usr/lib/clang/9.0.0/'
-else
-  Plug 'tweekmonster/deoplete-clang2', { 'for': 'c' }
-endif
-
 " JS
-Plug 'othree/jspc.vim'
+Plug 'mxw/vim-jsx'
 Plug 'heavenshell/vim-jsdoc'
-Plug 'mxw/vim-jsx', { 'for': ['javascript', 'jsx' ] }
-Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
-Plug 'carlitux/deoplete-ternjs', { 'do': 'npm install -g tern', 'for': 'javascript' }
+Plug 'pangloss/vim-javascript'
+Plug 'carlitux/deoplete-ternjs', { 'do': 'npm install -g tern' }
 
 " GQL
 Plug 'jparise/vim-graphql', { 'for': 'gql' }
 
-" Markdown
-Plug 'junegunn/goyo.vim', { 'for': 'markdown' }
-
 " Comments
 Plug 'scrooloose/nerdcommenter'
+
+" Search
+Plug 'mileszs/ack.vim'
 
 call plug#end()
 
@@ -62,26 +57,29 @@ set encoding=utf8
 " Set language for spelling
 set spell spelllang=en
 
+" Enable True colors for terminal
+colorscheme wombat256i
+
 " Enable Nerd Fonts (Patched)
 set guifont=SFMono\ Nerd\ Font:h14
 
 " Enable syntax highlights
 syntax on
 
-" Enable True colors for terminal
-colorscheme wombat256i
+" Reduce re-renders
+set lazyredraw
 
-" Set columns ruler
-set colorcolumn=90
+" No code wrap
+set nowrap
 
 " Enable Line number (Hybrid)
 set number relativenumber
 
 " Enable Auto Indentation
-filetype indent on
-filetype plugin indent on
 set smartindent
 set autoindent
+filetype indent on
+filetype plugin indent on
 
 " Use spaces instead of tabs
 set expandtab
@@ -90,8 +88,8 @@ set expandtab
 set smarttab
 
 " Set Tab setting (1 tab == 2 spaces)
-set shiftwidth=2
 set tabstop=2
+set shiftwidth=2
 
 " Highlight search matches
 set hlsearch
@@ -123,17 +121,30 @@ set nofoldenable
 " Set default folding method
 set foldmethod=syntax
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Set Spelling markers
+highlight clear SpellBad
+highlight SpellBad cterm=underline
+
+" Set columns ruler
+set colorcolumn=80
+
+" Set cursor line highlight
+set cursorline
+
+" Set Search highlight color
+highlight Search guibg=#9e9e9e
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Supertab setting
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:SuperTabClosePreviewOnPopupClose = 1
+let g:SuperTabClosePreviewOnPopupClose=1
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Files, backups and undo
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Turn backup off, since most stuff is in xvn, git et.c anyway...
-set nobackup
 set nowb
+set nobackup
 set noswapfile
 
 """"""""""""""""""""""""""""""""""""""""""""""
@@ -155,33 +166,35 @@ nmap <CR> O<Esc>
 " Set <leader> key
 let mapleader="\\"
 
-" Save File mapping
-map <leader>w :w<CR>
+" Search and replace mapping
+map <Leader>s :%s/\<<C-r><C-w>\>/
+
+" Search and replace mapping
+map <Leader>f :Ack <C-r><C-w>
 
 " Buffer Control mapping
-map <leader>' :bn<CR>
-map <leader>; :bp<CR>
-map <leader>q :q!<CR>
+map <leader>w :w<CR>
+map <leader>Q :q!<CR>
 
 " Tab Control mapping
-map <leader>n :tabnew<CR>
-map <leader>] :tabnext<CR>
-map <leader>[ :tabprevious<CR>
+map <leader>t :tabnew<CR>
+map <leader>n :tabnext<CR>
+map <leader>p :tabprevious<CR>
 
 " Pane resize mapping
 map <leader>, :vertical resize +5<CR>
 map <leader>. :vertical resize -5<CR>
 
-" JS Doc mapping
-nmap <leader>d :JsDoc<CR>
-
 " VIM Test mapping
 nnoremap <C-t> :TestNearest<CR>
-nnoremap <C-t-t> :TestFile<CR>
+nnoremap <C-S-t> :TestFile<CR>
 
 " Move VISUAL LINE selection within buffer.
 xnoremap <silent> K :call najeeb#functions#move_selection_up()<CR>
 xnoremap <silent> J :call najeeb#functions#move_selection_down()<CR>
+
+" ALE cycle errors
+map <leader>e :ALENext
 
 """"""""""""""""""""""""""""""""""""""""""""""
 " Deoplete setting (Autocomplete)
@@ -194,7 +207,6 @@ let g:deoplete#enable_at_startup = 1
 """"""""""""""""""""""""""""""""""""""""""""""
 let g:deoplete#sources#ternjs#docs = 1
 let g:deoplete#sources#ternjs#types = 1
-let g:deoplete#sources#ternjs#depths = 1
 let g:deoplete#sources#ternjs#case_insensitive = 1
 let g:deoplete#sources#ternjs#include_keywords = 1
 
@@ -216,8 +228,8 @@ let g:ctrlp_working_path_mode = 'ra'
 " Enable Lazy mode (Do NOT fucking search until I stop for 500ms)
 let g:ctrlp_lazy_update = 500
 
-" Set buffer mode to search file name
-let g:ctrlp_bufname_mod = ':t'
+"" Set buffer mode to search file name
+"let g:ctrlp_bufname_mod = ':t'
 
 " Set match window location and behaviour
 let g:ctrlp_match_window = 'bottom,order:btt,min:5,max:25,results:25'
@@ -228,6 +240,13 @@ let g:ctrlp_max_depth = 15
 """"""""""""""""""""""""""""""""""""""""""""""
 " NERDTree Setting
 """"""""""""""""""""""""""""""""""""""""""""""
+" Auto open nerdtree on directory
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | endif
+
+" Close Vim if all buffers are closed and nerdtree is the last man standing
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+
 " Map Ctrl - N to toggle nerd tree
 map <C-n> :NERDTreeToggle<CR>
 
@@ -249,12 +268,11 @@ let g:lightline = {
       \ 'active': {
       \   'left': [
       \				[ 'mode', 'paste' ],
-      \				[ 'gitbranch', 'readonly', 'filename', 'modified' ]
+      \				[ 'gitbranch', 'filename', 'modified' ]
       \			],
       \	  'right':[
       \				[ 'lineinfo' ],
-      \				[ 'percent' ],
-      \				[ 'fileencoding', 'filetype', 'charvaluehex' ],
+      \				[ 'fileencoding', 'filetype' ],
       \				[ 'linter_errors', 'linter_warnings', 'linter_ok' ]
       \			]
       \ },
@@ -298,18 +316,6 @@ let g:ale_echo_msg_warning_str = 'W'
 let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
 
 """"""""""""""""""""""""""""""""""""""""""""""
-" JSX setting
-""""""""""""""""""""""""""""""""""""""""""""""
-" Enable JSX for js and other file types
-let g:jsx_ext_required = 0
-
-""""""""""""""""""""""""""""""""""""""""""""""
-" Better Vim Diff
-""""""""""""""""""""""""""""""""""""""""""""""
-" Set Colors for vim Diff
-highlight DiffChange cterm=none ctermfg=fg ctermbg=DarkGreen gui=none guifg=fg guibg=DarkGreen
-
-""""""""""""""""""""""""""""""""""""""""""""""
 " Javascript Document plugin setting
 """"""""""""""""""""""""""""""""""""""""""""""
 let g:jsdoc_enable_es6 = 1
@@ -317,3 +323,14 @@ let g:jsdoc_input_description = 1
 let g:jsdoc_allow_input_prompt = 1
 let g:jsdoc_return = 1
 let g:jsdoc_return_type = 1
+
+""""""""""""""""""""""""""""""""""""""""""""""
+" AG the silver searcher for vim.ack
+""""""""""""""""""""""""""""""""""""""""""""""
+let g:ackhighlight = 1
+
+if executable('ag')
+  let g:ackprg = 'ag --vimgrep'
+endif
+
+
