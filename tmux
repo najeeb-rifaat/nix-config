@@ -31,7 +31,7 @@ set -g escape-time 0
 #####################################################
 # remap prefix from 'C-b' to 'C-a'
 unbind C-b
-set-option -g prefix C-a
+set-option -g prefix C-s
 bind-key C-a send-prefix
 
 # split panes using | and -

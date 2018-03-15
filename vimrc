@@ -134,6 +134,9 @@ set cursorline
 " Set Search highlight color
 highlight Search guibg=#9e9e9e
 
+" Use system clipboard
+set clipboard=unnamed
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Supertab setting
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -177,7 +180,6 @@ map <leader>w :w<CR>
 map <leader>Q :q!<CR>
 
 " Tab Control mapping
-map <leader>t :tabnew<CR>
 map <leader>n :tabnext<CR>
 map <leader>p :tabprevious<CR>
 
@@ -186,8 +188,7 @@ map <leader>, :vertical resize +5<CR>
 map <leader>. :vertical resize -5<CR>
 
 " VIM Test mapping
-nnoremap <C-t> :TestNearest<CR>
-nnoremap <C-S-t> :TestFile<CR>
+map <leader>t :TestNearest<CR>
 
 " Move VISUAL LINE selection within buffer.
 xnoremap <silent> K :call najeeb#functions#move_selection_up()<CR>
