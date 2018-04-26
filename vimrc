@@ -1,4 +1,9 @@
 """"""""""""""""""""""""""""""""""""""""""""""
+" Detect Mac or Linux
+""""""""""""""""""""""""""""""""""""""""""""""
+let s:uname = system('uanme -s')
+
+""""""""""""""""""""""""""""""""""""""""""""""
 " Enable -Plug- the plug-in manager
 """"""""""""""""""""""""""""""""""""""""""""""
 call plug#begin('~/.local/share/nvim/plugged')
@@ -9,6 +14,7 @@ Plug 'ctrlpvim/ctrlp.vim'
 Plug 'itchyny/lightline.vim'
 Plug 'ryanoasis/vim-devicons'
 Plug 'airblade/vim-gitgutter'
+Plug 'wellle/tmux-complete.vim'
 
 " Color testers
 Plug 'guns/xterm-color-table.vim'
@@ -36,6 +42,9 @@ Plug 'mxw/vim-jsx'
 Plug 'heavenshell/vim-jsdoc'
 Plug 'pangloss/vim-javascript'
 Plug 'carlitux/deoplete-ternjs', { 'do': 'npm install -g tern' }
+
+" C lang
+Plug 'zchee/deoplete-clang'
 
 " GQL
 Plug 'jparise/vim-graphql', { 'for': 'gql' }
@@ -83,8 +92,6 @@ filetype plugin indent on
 
 " Use spaces instead of tabs
 set expandtab
-
-" Be smart when using tabs ;)
 set smarttab
 
 " Set Tab setting (1 tab == 2 spaces)
@@ -329,9 +336,18 @@ let g:jsdoc_return_type = 1
 " AG the silver searcher for vim.ack
 """"""""""""""""""""""""""""""""""""""""""""""
 let g:ackhighlight = 1
-
 if executable('ag')
   let g:ackprg = 'ag --vimgrep'
 endif
 
+""""""""""""""""""""""""""""""""""""""""""""""
+" Clang completion settings
+""""""""""""""""""""""""""""""""""""""""""""""
+if s:uname == 'Darwin'
+  let g:deoplete#sources#clang#libclang_path = '/usr/lib/libclang.so.6'
+  let g:deoplete#sources#clang#clang_header = '/usr/lib/clang'
+else
+  let g:deoplete#sources#clang#libclang_path = '/usr/lib/libclang.so.6'
+  let g:deoplete#sources#clang#clang_header = '/usr/lib/clang'
+endif
 

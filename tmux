@@ -75,7 +75,7 @@ set -g pane-active-border-fg colour51
 set -g status-attr dim
 set -g status-bg colour235
 set -g status-fg colour51
-set -g status-interval 10
+set -g status-interval 1
 set -g status-position top
 set -g status-justify centre
 
@@ -88,13 +88,8 @@ set -g window-status-current-bg black
 set -g window-status-format ' #I:#W:#F '
 set -g window-status-current-format ' #[fg=white,bg=black]#I:#W:#F '
 
-# right side of status bar
-set -g status-right-length 50
-set -g status-right '#[fg=white,bold]%h %d %Y #[fg=white,bold]%l:%M %p#[default]#[fg=white]'
-
-# left side of status bar
-set -g status-left-length 50
-set -g status-left '#[fg=black][#[fg=white]#(echo $USER) @ #H#[fg=white]'
+set -g status-left "#[fg=green,bg=black]#(tmux-mem-cpu-load --color --interval 2)#[default]"
+set -g status-left-length 60
 
 #####################################################
 ##                     Plugins                     ##
@@ -105,4 +100,11 @@ set -g @plugin 'tmux-plugins/tmux-sensible'
 set -g @plugin 'tmux-plugins/tmux-pain-control'
 set -g @plugin 'tmux-plugins/tmux-yank'
 set -g @plugin 'tmux-plugins/tmux-open'
+set -g @plugin 'tmux-plugins/tmux-sidebar'
+set -g @plugin 'thewtex/tmux-mem-cpu-load'
+
 run '~/.tmux/plugins/tpm/tpm'
+
+
+run-shell ~/.tmux.conf/plugins/plugins/tmux-sidebar/sidebar.tmux
+
