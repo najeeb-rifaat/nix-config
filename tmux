@@ -2,7 +2,7 @@
 ##                    DEFAULTS                     ##
 #####################################################
 # Set default color map (256) color emulators
-set -g default-terminal "screen-256color"
+set -g default-terminal "xterm-256color"
 
 # VI mode ! in tmux ;)
 set-window-option -g monitor-activity off
@@ -96,15 +96,12 @@ set -g status-left-length 60
 #####################################################
 # List of plugins
 set -g @plugin 'tmux-plugins/tpm'
-set -g @plugin 'tmux-plugins/tmux-sensible'
 set -g @plugin 'tmux-plugins/tmux-pain-control'
 set -g @plugin 'tmux-plugins/tmux-yank'
 set -g @plugin 'tmux-plugins/tmux-open'
-set -g @plugin 'tmux-plugins/tmux-sidebar'
 set -g @plugin 'thewtex/tmux-mem-cpu-load'
 
 run '~/.tmux/plugins/tpm/tpm'
-
 
 run-shell ~/.tmux.conf/plugins/plugins/tmux-sidebar/sidebar.tmux
 

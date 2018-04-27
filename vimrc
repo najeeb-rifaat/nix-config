@@ -1,9 +1,4 @@
 """"""""""""""""""""""""""""""""""""""""""""""
-" Detect Mac or Linux
-""""""""""""""""""""""""""""""""""""""""""""""
-let s:uname = system('uanme -s')
-
-""""""""""""""""""""""""""""""""""""""""""""""
 " Enable -Plug- the plug-in manager
 """"""""""""""""""""""""""""""""""""""""""""""
 call plug#begin('~/.local/share/nvim/plugged')
@@ -209,6 +204,7 @@ map <leader>e :ALENext
 """"""""""""""""""""""""""""""""""""""""""""""
 " Enable on startup
 let g:deoplete#enable_at_startup = 1
+let g:deoplete#file#enable_buffer_path = 1
 
 """"""""""""""""""""""""""""""""""""""""""""""
 " Tern-Deoplete setting (Autocomplete)
@@ -343,11 +339,11 @@ endif
 """"""""""""""""""""""""""""""""""""""""""""""
 " Clang completion settings
 """"""""""""""""""""""""""""""""""""""""""""""
-if s:uname == 'Darwin'
-  let g:deoplete#sources#clang#libclang_path = '/usr/lib/libclang.so.6'
-  let g:deoplete#sources#clang#clang_header = '/usr/lib/clang'
+if has('macunix')
+  let g:deoplete#sources#clang#clang_header = '/usr/local/opt/llvm/lib/clang'
+  let g:deoplete#sources#clang#libclang_path = '/usr/local/opt/llvm/lib/libclang.dylib'
 else
-  let g:deoplete#sources#clang#libclang_path = '/usr/lib/libclang.so.6'
   let g:deoplete#sources#clang#clang_header = '/usr/lib/clang'
+  let g:deoplete#sources#clang#libclang_path = '/usr/lib/libclang.so.6'
 endif
 
