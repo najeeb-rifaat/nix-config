@@ -197,7 +197,7 @@ xnoremap <silent> K :call najeeb#functions#move_selection_up()<CR>
 xnoremap <silent> J :call najeeb#functions#move_selection_down()<CR>
 
 " ALE cycle errors
-map <leader>e :ALENext
+map <leader>e :ALENext<CR>
 
 """"""""""""""""""""""""""""""""""""""""""""""
 " Deoplete setting (Autocomplete)
@@ -299,8 +299,8 @@ highlight ALEError ctermbg=DarkRed
 highlight ALEWarning ctermbg=DarkMagenta
 
 " Signs
-let g:ale_sign_error = '✕'
-let g:ale_sign_warning = '⚠'
+let g:ale_sign_error = 'E'
+let g:ale_sign_warning = 'W'
 
 " set LightLine info
 let g:lightline.component_expand = {
