@@ -3,16 +3,23 @@
 """"""""""""""""""""""""""""""""""""""""""""""
 call plug#begin('~/.local/share/nvim/plugged')
 
+
 Plug 'janko-m/vim-test'
 Plug 'ervandew/supertab'
 Plug 'ctrlpvim/ctrlp.vim'
+Plug 'Shougo/neco-syntax'
+Plug 'tpope/vim-dispatch'
 Plug 'itchyny/lightline.vim'
 Plug 'ryanoasis/vim-devicons'
 Plug 'airblade/vim-gitgutter'
 Plug 'wellle/tmux-complete.vim'
+Plug 'christoomey/vim-tmux-navigator'
 
 " Color testers
 Plug 'guns/xterm-color-table.vim'
+
+" Color display
+Plug 'ap/vim-css-color'
 
 " Plugin for git management
 Plug 'tpope/vim-fugitive'
@@ -40,6 +47,9 @@ Plug 'carlitux/deoplete-ternjs', { 'do': 'npm install -g tern' }
 
 " C lang
 Plug 'zchee/deoplete-clang'
+
+" Dotnet
+Plug 'OmniSharp/omnisharp-vim'
 
 " GQL
 Plug 'jparise/vim-graphql', { 'for': 'gql' }
@@ -84,6 +94,9 @@ set smartindent
 set autoindent
 filetype indent on
 filetype plugin indent on
+
+" Use omni comletions
+filetype plugin on
 
 " Use spaces instead of tabs
 set expandtab
@@ -142,7 +155,7 @@ set clipboard=unnamed
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Supertab setting
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:SuperTabClosePreviewOnPopupClose=1
+let g:SuperTabClosePreviewOnPopupClose = 1
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Files, backups and undo
@@ -161,14 +174,13 @@ map <down> <nop>
 map <left> <nop>
 map <right> <nop>
 
+nnoremap <silent> <BS> :TmuxNavigateLeft<cr>
+
 " Map <Space> to / (search) and Ctrl-<Space> to ? (backwards search)
 map <space> /
 map <c-space> ?
 
-" Better new line
-nmap <CR> O<Esc>
-
-" Set <leader> key
+" Set <Leader> key
 let mapleader="\\"
 
 " Search and replace mapping
@@ -176,28 +188,34 @@ map <Leader>s :%s/\<<C-r><C-w>\>/
 
 " Search and replace mapping
 map <Leader>f :Ack <C-r><C-w>
+map <Leader>d :/\<<C-r><C-w>\>/<CR>
 
 " Buffer Control mapping
-map <leader>w :w<CR>
-map <leader>Q :q!<CR>
+map <Leader>w :w<CR>
+map <Leader>Q :q!<CR>
 
 " Tab Control mapping
-map <leader>n :tabnext<CR>
-map <leader>p :tabprevious<CR>
+map <Leader>n :tabnext<CR>
+map <Leader>p :tabprevious<CR>
 
 " Pane resize mapping
-map <leader>, :vertical resize +5<CR>
-map <leader>. :vertical resize -5<CR>
+map <Leader>, :vertical resize +5<CR>
+map <Leader>. :vertical resize -5<CR>
 
 " VIM Test mapping
-map <leader>t :TestNearest<CR>
+map <Leader>t :TestNearest<CR>
 
 " Move VISUAL LINE selection within buffer.
 xnoremap <silent> K :call najeeb#functions#move_selection_up()<CR>
 xnoremap <silent> J :call najeeb#functions#move_selection_down()<CR>
 
 " ALE cycle errors
-map <leader>e :ALENext<CR>
+map <Leader>e :ALENext<CR>
+
+""""""""""""""""""""""""""""""""""""""""""""""
+" Deoplete setting (Autocomplete)
+""""""""""""""""""""""""""""""""""""""""""""""
+let test#strategy = "dispatch"
 
 """"""""""""""""""""""""""""""""""""""""""""""
 " Deoplete setting (Autocomplete)
@@ -299,8 +317,8 @@ highlight ALEError ctermbg=DarkRed
 highlight ALEWarning ctermbg=DarkMagenta
 
 " Signs
-let g:ale_sign_error = 'E'
-let g:ale_sign_warning = 'W'
+let g:ale_sign_error = '💣'
+let g:ale_sign_warning = '🚩'
 
 " set LightLine info
 let g:lightline.component_expand = {
@@ -315,9 +333,10 @@ let g:lightline.component_type = {
   \ }
 
 " Show errors in LightLine:
-let g:ale_echo_msg_error_str = 'E'
-let g:ale_echo_msg_warning_str = 'W'
+let g:ale_echo_msg_error_str = '💣'
+let g:ale_echo_msg_warning_str = '🚩'
 let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
+let g:ale_statusline_format = ['💣 %d', '🚩 %d', '']
 
 """"""""""""""""""""""""""""""""""""""""""""""
 " Javascript Document plugin setting
@@ -343,7 +362,11 @@ if has('macunix')
   let g:deoplete#sources#clang#clang_header = '/usr/local/opt/llvm/lib/clang'
   let g:deoplete#sources#clang#libclang_path = '/usr/local/opt/llvm/lib/libclang.dylib'
 else
-  let g:deoplete#sources#clang#clang_header = '/usr/lib/clang'
-  let g:deoplete#sources#clang#libclang_path = '/usr/lib/libclang.so.6'
+  let g:deoplete#sources#clang#clang_header = '/usr/lib/llvm-6.0/lib/clang'
+  let g:deoplete#sources#clang#libclang_path = '/usr/lib/llvm-6.0/lib/libclang.so.1'
 endif
+
+
+let g:OmniSharp_timeout = 10
+let g:OmniSharp_server_path = '/src/omnisharp/run'
 
