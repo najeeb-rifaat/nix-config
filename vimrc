@@ -74,6 +74,9 @@ call plug#end()
 """"""""""""""""""""""""""""""""""""""""""""""
 " General Setting
 """"""""""""""""""""""""""""""""""""""""""""""
+" Set Mouse usage 
+set mouse=a
+
 " Set Default encoding
 set encoding=utf8
 
