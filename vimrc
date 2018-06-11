@@ -12,8 +12,17 @@ Plug 'tpope/vim-dispatch'
 Plug 'itchyny/lightline.vim'
 Plug 'ryanoasis/vim-devicons'
 Plug 'airblade/vim-gitgutter'
+
+" Tmux omni func completer
 Plug 'wellle/tmux-complete.vim'
+
+" Tmux pane navigation
 Plug 'christoomey/vim-tmux-navigator'
+
+" Markdown preview
+Plug 'godlygeek/tabular'
+Plug 'plasticboy/vim-markdown'
+Plug 'iamcco/markdown-preview.vim'
 
 " Color testers
 Plug 'guns/xterm-color-table.vim'
@@ -95,7 +104,7 @@ set autoindent
 filetype indent on
 filetype plugin indent on
 
-" Use omni comletions
+" Use omni completions based on file type
 filetype plugin on
 
 " Use spaces instead of tabs
@@ -119,7 +128,7 @@ set smartcase
 au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 
 " Delete white space on-save
-autocmd BufWritePre * :%s/\s\+$//e
+" autocmd BufWritePre * :%s/\s\+$//e
 
 " Show keys
 set showcmd
@@ -151,6 +160,10 @@ highlight Search guibg=#9e9e9e
 
 " Use system clipboard
 set clipboard=unnamed
+
+" Use lightgreen for highlight on extra traiting spaces
+highlight ExtraWhitespace ctermbg=lightblue guibg=lightblue
+match ExtraWhitespace /\s\+\%#\@<!$/
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Supertab setting
@@ -193,6 +206,7 @@ map <Leader>d :/\<<C-r><C-w>\>/<CR>
 " Buffer Control mapping
 map <Leader>w :w<CR>
 map <Leader>Q :q!<CR>
+map <Leader>b :buffer 
 
 " Tab Control mapping
 map <Leader>n :tabnext<CR>
@@ -211,6 +225,9 @@ xnoremap <silent> J :call najeeb#functions#move_selection_down()<CR>
 
 " ALE cycle errors
 map <Leader>e :ALENext<CR>
+
+" Markdown preview setting
+map <leader>m :MarkdownPreview<CR>
 
 """"""""""""""""""""""""""""""""""""""""""""""
 " Deoplete setting (Autocomplete)
@@ -290,12 +307,12 @@ let g:lightline = {
       \ 'active': {
       \   'left': [
       \				[ 'mode', 'paste' ],
-      \				[ 'gitbranch', 'filename', 'modified' ]
+      \				[ 'filename', 'modified' ]
       \			],
       \	  'right':[
       \				[ 'lineinfo' ],
-      \				[ 'fileencoding', 'filetype' ],
-      \				[ 'linter_errors', 'linter_warnings', 'linter_ok' ]
+      \				[ 'fileencoding', 'percent' ],
+      \				[ 'linter_errors', 'linter_warnings', 'gitbranch' ]
       \			]
       \ },
       \ 'component_function': {
