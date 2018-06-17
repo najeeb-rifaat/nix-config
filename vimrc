@@ -235,7 +235,7 @@ map <leader>m :MarkdownPreview<CR>
 """"""""""""""""""""""""""""""""""""""""""""""
 " Deoplete setting (Autocomplete)
 """"""""""""""""""""""""""""""""""""""""""""""
-let test#strategy = "dispatch"
+let test#strategy = "neovim"
 
 """"""""""""""""""""""""""""""""""""""""""""""
 " Deoplete setting (Autocomplete)
