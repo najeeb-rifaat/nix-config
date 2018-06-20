@@ -3,7 +3,6 @@
 """"""""""""""""""""""""""""""""""""""""""""""
 call plug#begin('~/.local/share/nvim/plugged')
 
-
 Plug 'janko-m/vim-test'
 Plug 'ervandew/supertab'
 Plug 'ctrlpvim/ctrlp.vim'
@@ -12,6 +11,7 @@ Plug 'tpope/vim-dispatch'
 Plug 'itchyny/lightline.vim'
 Plug 'ryanoasis/vim-devicons'
 Plug 'airblade/vim-gitgutter'
+Plug 'editorconfig/editorconfig-vim'
 
 " Tmux omni func completer
 Plug 'wellle/tmux-complete.vim'
@@ -68,6 +68,10 @@ Plug 'scrooloose/nerdcommenter'
 
 " Search
 Plug 'mileszs/ack.vim'
+
+" CSS and Colors
+Plug 'KabbAmine/vCoolor.vim'
+Plug 'cakebaker/scss-syntax.vim'
 
 call plug#end()
 
@@ -386,7 +390,15 @@ else
   let g:deoplete#sources#clang#libclang_path = '/usr/lib/llvm-6.0/lib/libclang.so.1'
 endif
 
-
+""""""""""""""""""""""""""""""""""""""""""""""
+" Omnisharp setting
+""""""""""""""""""""""""""""""""""""""""""""""
 let g:OmniSharp_timeout = 10
 let g:OmniSharp_server_path = '/src/omnisharp/run'
+
+""""""""""""""""""""""""""""""""""""""""""""""
+" vCooler setting
+""""""""""""""""""""""""""""""""""""""""""""""
+" Set dialogue type (Using YAD gtk tool)
+let g:vcooler_custom_picker='yad --width 500 --entry --title "Choooose the color ?" --color'
 
