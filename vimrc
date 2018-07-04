@@ -78,7 +78,7 @@ call plug#end()
 """"""""""""""""""""""""""""""""""""""""""""""
 " General Setting
 """"""""""""""""""""""""""""""""""""""""""""""
-" Set Mouse usage 
+" Set Mouse usage
 set mouse=a
 
 " Set Default encoding
@@ -341,8 +341,8 @@ highlight ALEError ctermbg=DarkRed
 highlight ALEWarning ctermbg=DarkMagenta
 
 " Signs
-let g:ale_sign_error = '💣'
-let g:ale_sign_warning = '🚩'
+let g:ale_sign_error = ''
+let g:ale_sign_warning = ''
 
 " set LightLine info
 let g:lightline.component_expand = {
@@ -357,10 +357,10 @@ let g:lightline.component_type = {
   \ }
 
 " Show errors in LightLine:
-let g:ale_echo_msg_error_str = '💣'
-let g:ale_echo_msg_warning_str = '🚩'
+let g:ale_echo_msg_error_str = ''
+let g:ale_echo_msg_warning_str = ''
 let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
-let g:ale_statusline_format = ['💣 %d', '🚩 %d', '']
+let g:ale_statusline_format = [' %d', ' %d', '']
 
 """"""""""""""""""""""""""""""""""""""""""""""
 " Javascript Document plugin setting
