@@ -4,7 +4,6 @@
 call plug#begin('~/.local/share/nvim/plugged')
 
 Plug 'janko-m/vim-test'
-"Plug 'ervandew/supertab'
 
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'Shougo/neco-syntax'
@@ -42,7 +41,6 @@ Plug 'Xuyuanp/nerdtree-git-plugin', { 'on':  'NERDTreeToggle' }
 Plug 'low-ghost/nerdtree-fugitive', { 'on':  'NERDTreeToggle' }
 
 " Autocomplete
-"""Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'ncm2/ncm2'
 Plug 'roxma/nvim-yarp'
 
@@ -61,18 +59,12 @@ Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
 Plug 'ncm2/ncm2-tern', { 'do': 'npm install', 'for': 'javascript' }
 Plug 'ternjs/tern_for_vim', { 'do': 'npm install', 'for': 'javascript' }
 
-" C lang
-Plug 'zchee/deoplete-clang'
-
 " Go Lang
 Plug 'ncm2/ncm2-go', { 'for': 'go' }
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries', 'for': 'go' }
 
 " GQL
 Plug 'jparise/vim-graphql', { 'for': 'gql' }
-
-" Comments
-Plug 'scrooloose/nerdcommenter'
 
 " Search
 Plug 'mileszs/ack.vim'

@@ -89,7 +89,7 @@ set -g pane-active-border-fg colour51
 set -g status-attr dim
 set -g status-bg colour235
 set -g status-fg colour51
-set -g status-interval 1
+set -g status-interval 5
 set -g status-position top
 set -g status-justify centre
 
@@ -99,12 +99,14 @@ set -g window-status-bell-fg red
 set -g window-status-bell-bg black
 set -g window-status-current-fg white
 set -g window-status-current-bg black
-set -g window-status-format ' #I:#W:#F '
-set -g window-status-current-format ' #[fg=white,bg=black]#I:#W:#F '
+set -g window-status-format ' #I:#W '
+set -g window-status-current-format ' #[fg=white,bg=black]#I:#W '
 
-set -g status-left "#[fg=green,bg=black]#(tmux-mem-cpu-load --color --interval 2)#[default]"
-set -g status-left-length 60
+set -g status-left "#[fg=white,bg=black]#(tmux-mem-cpu-load -t 1 -m 1 -a 0 -g 0 -i 1)"
+set -g status-left-length 50
 
+set -g status-right "#[fg=white,bg=black]#H"
+set -g status-left-length 50
 #####################################################
 ##                     Plugins                     ##
 #####################################################
