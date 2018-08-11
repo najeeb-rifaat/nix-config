@@ -7,11 +7,9 @@
     "src/**/*.js"
   ],
   "plugins": {
-    "doc_comment": {
-      "fullDocs": true
-    },
     "es_modules": {},
     "modules": {},
-    "node": {}
+    "node": {},
+    "jsx": {}
   }
 }

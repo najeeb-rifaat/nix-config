@@ -4,10 +4,10 @@
 call plug#begin('~/.local/share/nvim/plugged')
 
 Plug 'janko-m/vim-test'
-Plug 'ervandew/supertab'
+"Plug 'ervandew/supertab'
+
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'Shougo/neco-syntax'
-Plug 'tpope/vim-dispatch'
 Plug 'itchyny/lightline.vim'
 Plug 'ryanoasis/vim-devicons'
 Plug 'airblade/vim-gitgutter'
@@ -42,7 +42,13 @@ Plug 'Xuyuanp/nerdtree-git-plugin', { 'on':  'NERDTreeToggle' }
 Plug 'low-ghost/nerdtree-fugitive', { 'on':  'NERDTreeToggle' }
 
 " Autocomplete
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+"""Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'ncm2/ncm2'
+Plug 'roxma/nvim-yarp'
+
+Plug 'ncm2/ncm2-tmux'
+Plug 'ncm2/ncm2-path'
+Plug 'ncm2/ncm2-bufword'
 
 " Linting
 Plug 'w0rp/ale'
@@ -50,15 +56,17 @@ Plug 'maximbaz/lightline-ale'
 
 " JS
 Plug 'mxw/vim-jsx'
-Plug 'heavenshell/vim-jsdoc'
-Plug 'pangloss/vim-javascript'
-Plug 'carlitux/deoplete-ternjs', { 'do': 'npm install -g tern' }
+Plug 'heavenshell/vim-jsdoc', { 'for': 'javascript' }
+Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
+Plug 'ncm2/ncm2-tern', { 'do': 'npm install', 'for': 'javascript' }
+Plug 'ternjs/tern_for_vim', { 'do': 'npm install', 'for': 'javascript' }
 
 " C lang
 Plug 'zchee/deoplete-clang'
 
-" Dotnet
-Plug 'OmniSharp/omnisharp-vim'
+" Go Lang
+Plug 'ncm2/ncm2-go', { 'for': 'go' }
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries', 'for': 'go' }
 
 " GQL
 Plug 'jparise/vim-graphql', { 'for': 'gql' }
@@ -108,6 +116,7 @@ set number relativenumber
 " Enable Auto Indentation
 set smartindent
 set autoindent
+
 filetype indent on
 filetype plugin indent on
 
@@ -172,6 +181,30 @@ set clipboard=unnamed
 highlight ExtraWhitespace ctermbg=lightblue guibg=lightblue
 match ExtraWhitespace /\s\+\%#\@<!$/
 
+" Disable all previews
+set completeopt-=preview
+
+" enable ncm2 for all buffers
+autocmd BufEnter * call ncm2#enable_for_buffer()
+
+" IMPORTANTE: :help Ncm2PopupOpen for more information
+set completeopt=noinsert,menuone,noselect
+
+" suppress the annoying 'match x of y', 'The only match' and 'Pattern not
+" found' messages
+set shortmess+=c
+
+" CTRL-C doesn't trigger the InsertLeave autocmd . map to <ESC> instead.
+inoremap <c-c> <ESC>
+
+" When the <Enter> key is pressed while the popup menu is visible, it only
+" hides the menu. Use this mapping to close the menu and also start a new
+" line.
+inoremap <expr> <CR> (pumvisible() ? "\<c-y>\<cr>" : "\<CR>")
+
+" Use <TAB> to select the popup menu:
+inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Supertab setting
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -237,7 +270,7 @@ map <Leader>e :ALENext<CR>
 map <leader>m :MarkdownPreview<CR>
 
 """"""""""""""""""""""""""""""""""""""""""""""
-" Deoplete setting (Autocomplete)
+" Test uses neovim terminal
 """"""""""""""""""""""""""""""""""""""""""""""
 let test#strategy = "neovim"
 
@@ -334,7 +367,7 @@ let g:lightline = {
 let g:ale_completion_enabled = 1
 
 " Auto fix on save:
-let g:ale_fix_on_save = 1
+let g:ale_fix_on_save = 0
 
 " ERROR/Warning color
 highlight ALEError ctermbg=DarkRed
