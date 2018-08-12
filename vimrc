@@ -43,8 +43,6 @@ Plug 'low-ghost/nerdtree-fugitive', { 'on':  'NERDTreeToggle' }
 " Autocomplete
 Plug 'ncm2/ncm2'
 Plug 'roxma/nvim-yarp'
-
-Plug 'ncm2/ncm2-tmux'
 Plug 'ncm2/ncm2-path'
 Plug 'ncm2/ncm2-bufword'
 
@@ -297,7 +295,7 @@ let g:ctrlp_custom_ignore = {
 let g:ctrlp_working_path_mode = 'ra'
 
 " Enable Lazy mode (Do NOT fucking search until I stop for 500ms)
-let g:ctrlp_lazy_update = 500
+let g:ctrlp_lazy_update = 200
 
 "" Set buffer mode to search file name
 "let g:ctrlp_bufname_mod = ':t'
@@ -306,7 +304,7 @@ let g:ctrlp_lazy_update = 500
 let g:ctrlp_match_window = 'bottom,order:btt,min:5,max:25,results:25'
 
 " Set Max depth of tested directories to search
-let g:ctrlp_max_depth = 15
+let g:ctrlp_max_depth = 10
 
 """"""""""""""""""""""""""""""""""""""""""""""
 " NERDTree Setting
