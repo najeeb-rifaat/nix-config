@@ -4,7 +4,7 @@
 call plug#begin('~/.local/share/nvim/plugged')
 
 Plug 'janko-m/vim-test'
-
+Plug 'mileszs/ack.vim'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'Shougo/neco-syntax'
 Plug 'itchyny/lightline.vim'
@@ -12,16 +12,8 @@ Plug 'ryanoasis/vim-devicons'
 Plug 'airblade/vim-gitgutter'
 Plug 'editorconfig/editorconfig-vim'
 
-" Tmux omni func completer
-Plug 'wellle/tmux-complete.vim'
-
 " Tmux pane navigation
 Plug 'christoomey/vim-tmux-navigator'
-
-" Markdown preview
-Plug 'godlygeek/tabular'
-Plug 'plasticboy/vim-markdown'
-Plug 'iamcco/markdown-preview.vim'
 
 " Color testers
 Plug 'guns/xterm-color-table.vim'
@@ -60,12 +52,11 @@ Plug 'ternjs/tern_for_vim', { 'do': 'npm install', 'for': 'javascript' }
 " Go Lang
 Plug 'ncm2/ncm2-go', { 'for': 'go' }
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries', 'for': 'go' }
+Plug 'jodosha/vim-godebug', { 'for': 'go' }
 
 " GQL
 Plug 'jparise/vim-graphql', { 'for': 'gql' }
 
-" Search
-Plug 'mileszs/ack.vim'
 
 " CSS and Colors
 Plug 'KabbAmine/vCoolor.vim'
@@ -425,3 +416,17 @@ let g:OmniSharp_server_path = '/src/omnisharp/run'
 " Set dialogue type (Using YAD gtk tool)
 let g:vcooler_custom_picker='yad --width 500 --entry --title "Choooose the color ?" --color'
 
+""""""""""""""""""""""""""""""""""""""""""""""
+" Go setting
+""""""""""""""""""""""""""""""""""""""""""""""
+let g:go_fmt_command = "goimports"
+let g:go_highlight_build_constraints = 1
+let g:go_highlight_extra_types = 1
+let g:go_highlight_fields = 1
+let g:go_highlight_functions = 1
+let g:go_highlight_methods = 1
+let g:go_highlight_operators = 1
+let g:go_highlight_structs = 1
+let g:go_highlight_types = 1
+let g:go_auto_sameids = 1
+let g:go_auto_type_info = 1
