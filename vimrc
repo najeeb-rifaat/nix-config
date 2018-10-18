@@ -34,8 +34,8 @@ Plug 'low-ghost/nerdtree-fugitive', { 'on':  'NERDTreeToggle' }
 
 " Autocomplete
 Plug 'ncm2/ncm2'
-Plug 'roxma/nvim-yarp'
 Plug 'ncm2/ncm2-path'
+Plug 'roxma/nvim-yarp'
 Plug 'ncm2/ncm2-bufword'
 
 " Linting
@@ -52,11 +52,9 @@ Plug 'ternjs/tern_for_vim', { 'do': 'npm install', 'for': 'javascript' }
 " Go Lang
 Plug 'ncm2/ncm2-go', { 'for': 'go' }
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries', 'for': 'go' }
-Plug 'jodosha/vim-godebug', { 'for': 'go' }
 
 " GQL
 Plug 'jparise/vim-graphql', { 'for': 'gql' }
-
 
 " CSS and Colors
 Plug 'KabbAmine/vCoolor.vim'
@@ -67,9 +65,6 @@ call plug#end()
 """"""""""""""""""""""""""""""""""""""""""""""
 " General Setting
 """"""""""""""""""""""""""""""""""""""""""""""
-" Set Mouse usage
-set mouse=a
-
 " Set Default encoding
 set encoding=utf8
 
@@ -87,6 +82,7 @@ syntax on
 
 " Reduce re-renders
 set lazyredraw
+set ttyfast
 
 " No code wrap
 set nowrap
@@ -227,7 +223,7 @@ map <Leader>d :/\<<C-r><C-w>\>/<CR>
 " Buffer Control mapping
 map <Leader>w :w<CR>
 map <Leader>Q :q!<CR>
-map <Leader>b :buffer 
+map <Leader>b :buffer
 
 " Tab Control mapping
 map <Leader>n :tabnext<CR>
