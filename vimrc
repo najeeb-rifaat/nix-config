@@ -34,9 +34,12 @@ Plug 'low-ghost/nerdtree-fugitive', { 'on':  'NERDTreeToggle' }
 
 " Autocomplete
 Plug 'ncm2/ncm2'
+Plug 'ncm2/ncm2-go'
+Plug 'ncm2/ncm2-jedi'
 Plug 'ncm2/ncm2-path'
 Plug 'roxma/nvim-yarp'
 Plug 'ncm2/ncm2-bufword'
+Plug 'filipekiss/ncm2-look.vim'
 
 " Linting
 Plug 'w0rp/ale'
@@ -44,6 +47,8 @@ Plug 'maximbaz/lightline-ale'
 
 " JS
 Plug 'mxw/vim-jsx'
+Plug 'HerringtonDarkholme/yats.vim'
+Plug 'ncm2/nvim-typescript', {'do': './install.sh', 'for': 'tsx' }
 Plug 'heavenshell/vim-jsdoc', { 'for': 'javascript' }
 Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
 Plug 'ncm2/ncm2-tern', { 'do': 'npm install', 'for': 'javascript' }
@@ -182,6 +187,12 @@ inoremap <expr> <CR> (pumvisible() ? "\<c-y>\<cr>" : "\<CR>")
 " Use <TAB> to select the popup menu:
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Look enable
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:ncm2_look_enabled = 1
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Supertab setting
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -226,8 +237,8 @@ map <Leader>Q :q!<CR>
 map <Leader>b :buffer
 
 " Tab Control mapping
-map <Leader>n :tabnext<CR>
-map <Leader>p :tabprevious<CR>
+map <Leader>] :tabnext<CR>
+map <Leader>[ :tabprevious<CR>
 
 " Pane resize mapping
 map <Leader>, :vertical resize +5<CR>
@@ -236,15 +247,23 @@ map <Leader>. :vertical resize -5<CR>
 " VIM Test mapping
 map <Leader>t :TestNearest<CR>
 
+" VIM Tern mapping
+map <Leader>jd :TernDefPreview<CR>
+map <Leader>jr :TernRename<CR>
+
 " Move VISUAL LINE selection within buffer.
 xnoremap <silent> K :call najeeb#functions#move_selection_up()<CR>
 xnoremap <silent> J :call najeeb#functions#move_selection_down()<CR>
+xnoremap <silent> <space> :call najeeb#functions#clean_useless_spaces()<CR>
 
 " ALE cycle errors
 map <Leader>e :ALENext<CR>
 
 " Markdown preview setting
 map <leader>m :MarkdownPreview<CR>
+
+" Remove useless spaces
+map <leader><space> :%s/\s\+$//<CR>
 
 """"""""""""""""""""""""""""""""""""""""""""""
 " Test uses neovim terminal
@@ -265,6 +284,8 @@ let g:deoplete#sources#ternjs#docs = 1
 let g:deoplete#sources#ternjs#types = 1
 let g:deoplete#sources#ternjs#case_insensitive = 1
 let g:deoplete#sources#ternjs#include_keywords = 1
+
+let g:tern#is_show_argument_hints_enabled = 1
 
 """"""""""""""""""""""""""""""""""""""""""""""
 " CTRL P setting

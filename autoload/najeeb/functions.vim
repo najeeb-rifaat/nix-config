@@ -23,4 +23,3 @@ function! najeeb#functions#move_selection_down() abort range
   let l:at_bottom=a:lastline == line('$')
   call s:Move("'>+1", l:at_bottom)
 endfunction
-
