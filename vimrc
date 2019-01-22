@@ -12,6 +12,9 @@ Plug 'ryanoasis/vim-devicons'
 Plug 'airblade/vim-gitgutter'
 Plug 'editorconfig/editorconfig-vim'
 
+" Markdown
+Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & npm install'  }
+
 " Tmux pane navigation
 Plug 'christoomey/vim-tmux-navigator'
 
