@@ -55,7 +55,6 @@ Plug 'ncm2/nvim-typescript', {'do': './install.sh', 'for': 'tsx' }
 Plug 'heavenshell/vim-jsdoc', { 'for': 'javascript' }
 Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
 Plug 'ncm2/ncm2-tern', { 'do': 'npm install', 'for': 'javascript' }
-Plug 'ternjs/tern_for_vim', { 'do': 'npm install', 'for': 'javascript' }
 
 " Go Lang
 Plug 'ncm2/ncm2-go', { 'for': 'go' }
@@ -64,9 +63,18 @@ Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries', 'for': 'go' }
 " GQL
 Plug 'jparise/vim-graphql', { 'for': 'gql' }
 
+" Clang (C/CXX)
+Plug 'ncm2/ncm2-pyclang', { 'for': 'clang' }
+
 " CSS and Colors
 Plug 'KabbAmine/vCoolor.vim'
 Plug 'cakebaker/scss-syntax.vim'
+
+" Dart Lang
+Plug 'dart-lang/dart-vim-plugin', { 'for': 'dart' }
+
+" LanguageServer client for NeoVim.
+Plug 'autozimu/LanguageClient-neovim', { 'branch': 'next', 'do': 'bash install.sh' }
 
 call plug#end()
 
@@ -281,25 +289,17 @@ let g:deoplete#enable_at_startup = 1
 let g:deoplete#file#enable_buffer_path = 1
 
 """"""""""""""""""""""""""""""""""""""""""""""
-" Tern-Deoplete setting (Autocomplete)
-""""""""""""""""""""""""""""""""""""""""""""""
-let g:deoplete#sources#ternjs#docs = 1
-let g:deoplete#sources#ternjs#types = 1
-let g:deoplete#sources#ternjs#case_insensitive = 1
-let g:deoplete#sources#ternjs#include_keywords = 1
-
-let g:tern#is_show_argument_hints_enabled = 1
-
-""""""""""""""""""""""""""""""""""""""""""""""
 " CTRL P setting
 """"""""""""""""""""""""""""""""""""""""""""""
+" Search by file name not directory
+let g:ctrlp_by_filename = 1
+
 " Set ignored paths
 set wildignore+=*/tmp/*,*/node_modules/*,*/ios/*,*/android/*,*.so,*.swp,*.zip
 let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
 let g:ctrlp_custom_ignore = {
   \ 'dir':  '\v[\/]\.(git|hg|svn)$',
-  \ 'file': '\v\.(exe|so|dll)$',
-  \ 'link': 'some_bad_symbolic_links',
+  \ 'file': '\v\.(exe|so|dll|DS_store)$',
   \ }
 
 " Set working path to nearest root
@@ -307,9 +307,6 @@ let g:ctrlp_working_path_mode = 'ra'
 
 " Enable Lazy mode (Do NOT fucking search until I stop for 500ms)
 let g:ctrlp_lazy_update = 200
-
-"" Set buffer mode to search file name
-"let g:ctrlp_bufname_mod = ':t'
 
 " Set match window location and behaviour
 let g:ctrlp_match_window = 'bottom,order:btt,min:5,max:25,results:25'
@@ -450,3 +447,13 @@ let g:go_highlight_structs = 1
 let g:go_highlight_types = 1
 let g:go_auto_sameids = 1
 let g:go_auto_type_info = 1
+
+
+""""""""""""""""""""""""""""""""""""""""""""""
+" LSP setting
+""""""""""""""""""""""""""""""""""""""""""""""
+let g:LanguageClient_serverCommands = {
+  \ 'javascript': ['javascript-typescript-stdio'],
+  \ 'typescript': ['javascript-typescript-stdio'],
+  \ 'dart': ['dart_language_server']
+  \ }
