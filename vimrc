@@ -3,8 +3,8 @@
 """"""""""""""""""""""""""""""""""""""""""""""
 call plug#begin('~/.local/share/nvim/plugged')
 
-Plug 'janko-m/vim-test'
 Plug 'mileszs/ack.vim'
+Plug 'janko-m/vim-test'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'Shougo/neco-syntax'
 Plug 'itchyny/lightline.vim'
@@ -17,12 +17,6 @@ Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & npm install'  }
 
 " Tmux pane navigation
 Plug 'christoomey/vim-tmux-navigator'
-
-" Color testers
-Plug 'guns/xterm-color-table.vim'
-
-" Color display
-Plug 'ap/vim-css-color'
 
 " Plugin for git management
 Plug 'tpope/vim-fugitive'
@@ -38,7 +32,6 @@ Plug 'low-ghost/nerdtree-fugitive', { 'on':  'NERDTreeToggle' }
 " Autocomplete
 Plug 'ncm2/ncm2'
 Plug 'ncm2/ncm2-go'
-Plug 'ncm2/ncm2-jedi'
 Plug 'ncm2/ncm2-path'
 Plug 'roxma/nvim-yarp'
 Plug 'ncm2/ncm2-bufword'
@@ -49,9 +42,7 @@ Plug 'w0rp/ale'
 Plug 'maximbaz/lightline-ale'
 
 " JS
-Plug 'mxw/vim-jsx'
-Plug 'HerringtonDarkholme/yats.vim'
-Plug 'ncm2/nvim-typescript', {'do': './install.sh', 'for': 'tsx' }
+Plug 'mxw/vim-jsx', { 'for': 'javascript.jsx' }
 Plug 'heavenshell/vim-jsdoc', { 'for': 'javascript' }
 Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
 Plug 'ncm2/ncm2-tern', { 'do': 'npm install', 'for': 'javascript' }
@@ -67,8 +58,8 @@ Plug 'jparise/vim-graphql', { 'for': 'gql' }
 Plug 'ncm2/ncm2-pyclang', { 'for': 'clang' }
 
 " CSS and Colors
-Plug 'KabbAmine/vCoolor.vim'
-Plug 'cakebaker/scss-syntax.vim'
+Plug 'ap/vim-css-color'
+Plug 'cakebaker/scss-syntax.vim', { 'for': 'dart' }
 
 " Dart Lang
 Plug 'dart-lang/dart-vim-plugin', { 'for': 'dart' }
@@ -159,13 +150,15 @@ highlight clear SpellBad
 highlight SpellBad cterm=underline
 
 " Set columns ruler
-set colorcolumn=80
+set colorcolumn=81
 
 " Set cursor line highlight
 set cursorline
 
-" Set Search highlight color
-highlight Search guibg=#9e9e9e
+" Set Highlights color
+highlight Search guibg=#9E1199 ctermfg=White
+highlight Error ctermbg=Yellow ctermfg=Black cterm=underline,italic
+highlight ALEError ctermbg=none cterm=underline
 
 " Use system clipboard
 set clipboard=unnamed
@@ -174,14 +167,11 @@ set clipboard=unnamed
 highlight ExtraWhitespace ctermbg=lightblue guibg=lightblue
 match ExtraWhitespace /\s\+\%#\@<!$/
 
-" Disable all previews
-set completeopt-=preview
-
 " enable ncm2 for all buffers
 autocmd BufEnter * call ncm2#enable_for_buffer()
 
 " IMPORTANTE: :help Ncm2PopupOpen for more information
-set completeopt=noinsert,menuone,noselect
+set completeopt=noinsert,menu,noselect,preview
 
 " suppress the annoying 'match x of y', 'The only match' and 'Pattern not
 " found' messages
@@ -203,11 +193,6 @@ inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 " Look enable
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:ncm2_look_enabled = 1
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Supertab setting
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:SuperTabClosePreviewOnPopupClose = 1
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Files, backups and undo
@@ -367,10 +352,6 @@ let g:ale_completion_enabled = 1
 " Auto fix on save:
 let g:ale_fix_on_save = 0
 
-" ERROR/Warning color
-highlight ALEError ctermbg=DarkRed
-highlight ALEWarning ctermbg=DarkMagenta
-
 " Signs
 let g:ale_sign_error = ''
 let g:ale_sign_warning = ''
@@ -422,12 +403,6 @@ else
 endif
 
 """"""""""""""""""""""""""""""""""""""""""""""
-" Omnisharp setting
-""""""""""""""""""""""""""""""""""""""""""""""
-let g:OmniSharp_timeout = 10
-let g:OmniSharp_server_path = '/src/omnisharp/run'
-
-""""""""""""""""""""""""""""""""""""""""""""""
 " vCooler setting
 """"""""""""""""""""""""""""""""""""""""""""""
 " Set dialogue type (Using YAD gtk tool)
@@ -447,7 +422,6 @@ let g:go_highlight_structs = 1
 let g:go_highlight_types = 1
 let g:go_auto_sameids = 1
 let g:go_auto_type_info = 1
-
 
 """"""""""""""""""""""""""""""""""""""""""""""
 " LSP setting
