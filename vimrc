@@ -57,12 +57,20 @@ Plug 'jparise/vim-graphql', { 'for': 'gql' }
 " Clang (C/CXX)
 Plug 'ncm2/ncm2-pyclang', { 'for': 'clang' }
 
+" Python
+Plug 'ncm2/ncm2-jedi', { 'for': 'python' }
+
 " CSS and Colors
 Plug 'ap/vim-css-color'
-Plug 'cakebaker/scss-syntax.vim', { 'for': 'dart' }
+Plug 'cakebaker/scss-syntax.vim', { 'for': [ 'css', 'scss', 'sass' ] }
+Plug 'tpope/vim-haml', { 'for': [ 'css', 'scss', 'sass' ] }
 
 " Dart Lang
 Plug 'dart-lang/dart-vim-plugin', { 'for': 'dart' }
+
+" Java lang
+Plug 'ObserverOfTime/ncm2-jc2', { 'for': ['java', 'jsp'] }
+Plug 'artur-shaik/vim-javacomplete2', { 'for': ['java', 'jsp'] }
 
 " LanguageServer client for NeoVim.
 Plug 'autozimu/LanguageClient-neovim', { 'branch': 'next', 'do': 'bash install.sh' }
@@ -91,8 +99,10 @@ syntax on
 set lazyredraw
 set ttyfast
 
-" No code wrap
+" No code wrap, and side scroll on end of long line
 set nowrap
+set sidescroll=10
+set listchars+=precedes:<,extends:+
 
 " Enable Line number (Hybrid)
 set number relativenumber
