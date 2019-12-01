@@ -3,16 +3,19 @@
 """"""""""""""""""""""""""""""""""""""""""""""
 call plug#begin('~/.local/share/nvim/plugged')
 
+" Essentials
 Plug 'mileszs/ack.vim'
 Plug 'janko-m/vim-test'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'Shougo/neco-syntax'
+Plug 'mhinz/vim-startify'
 Plug 'itchyny/lightline.vim'
 Plug 'ryanoasis/vim-devicons'
 Plug 'airblade/vim-gitgutter'
 Plug 'editorconfig/editorconfig-vim'
 
 " Previews
+Plug 'majutsushi/tagbar'
 Plug 'ncm2/float-preview.nvim'
 
 " Markdown
@@ -84,6 +87,12 @@ Plug 'artur-shaik/vim-javacomplete2', { 'for': ['java', 'jsp'] }
 Plug 'autozimu/LanguageClient-neovim', { 'branch': 'next', 'do': 'bash install.sh' }
 
 call plug#end()
+
+
+""""""""""""""""""""""""""""""""""""""""""""""
+" Ctag tagbar
+""""""""""""""""""""""""""""""""""""""""""""""
+nmap <C-t> :TagbarToggle<CR>
 
 """"""""""""""""""""""""""""""""""""""""""""""
 " NCM2 wrap omnifuncs
