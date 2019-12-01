@@ -159,7 +159,7 @@ set ttyfast
 
 " No code wrap, and side scroll on end of long line
 set nowrap
-set sidescroll=10
+set sidescroll=5
 set listchars+=precedes:<,extends:+
 
 " Enable Line number (Hybrid)
