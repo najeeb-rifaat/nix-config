@@ -12,6 +12,9 @@ Plug 'ryanoasis/vim-devicons'
 Plug 'airblade/vim-gitgutter'
 Plug 'editorconfig/editorconfig-vim'
 
+" Previews
+Plug 'ncm2/float-preview.nvim'
+
 " Markdown
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & npm install'  }
 
@@ -29,13 +32,15 @@ Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 Plug 'Xuyuanp/nerdtree-git-plugin', { 'on':  'NERDTreeToggle' }
 Plug 'low-ghost/nerdtree-fugitive', { 'on':  'NERDTreeToggle' }
 
-" Autocomplete
+" NCM2 Basics
 Plug 'ncm2/ncm2'
 Plug 'ncm2/ncm2-go'
 Plug 'ncm2/ncm2-path'
 Plug 'roxma/nvim-yarp'
 Plug 'ncm2/ncm2-bufword'
+Plug 'fgrsnau/ncm2-aspell'
 Plug 'filipekiss/ncm2-look.vim'
+Plug 'ncm2/ncm2-vim' | Plug 'Shougo/neco-vim'
 
 " Linting
 Plug 'w0rp/ale'
@@ -46,6 +51,9 @@ Plug 'mxw/vim-jsx', { 'for': 'javascript.jsx' }
 Plug 'heavenshell/vim-jsdoc', { 'for': 'javascript' }
 Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
 Plug 'ncm2/ncm2-tern', { 'do': 'npm install', 'for': 'javascript' }
+
+" TS
+Plug 'ncm2/nvim-typescript', {'for': 'typescript', 'do': './install.sh'}
 
 " Go Lang
 Plug 'ncm2/ncm2-go', { 'for': 'go' }
@@ -76,6 +84,47 @@ Plug 'artur-shaik/vim-javacomplete2', { 'for': ['java', 'jsp'] }
 Plug 'autozimu/LanguageClient-neovim', { 'branch': 'next', 'do': 'bash install.sh' }
 
 call plug#end()
+
+""""""""""""""""""""""""""""""""""""""""""""""
+" NCM2 wrap omnifuncs
+""""""""""""""""""""""""""""""""""""""""""""""
+" CSS/SCSS
+au User Ncm2Plugin call ncm2#register_source({
+  \ 'name' : 'css',
+  \ 'priority': 3,
+  \ 'subscope_enable': 1,
+  \ 'scope': ['css','scss'],
+  \ 'mark': 'css',
+  \ 'word_pattern': '[\w\-]+',
+  \ 'complete_pattern': ':\s*',
+  \ 'on_complete': ['ncm2#on_complete#delay', 180, 'ncm2#on_complete#omni', 'csscomplete#CompleteCSS'],
+\ })
+
+" Java
+au User Ncm2Plugin call ncm2#register_source({
+  \ 'name' : 'java',
+  \ 'priority': 3,
+  \ 'subscope_enable': 1,
+  \ 'scope': ['java','jsp'],
+  \ 'mark': 'java',
+  \ 'word_pattern': '[\w\-]+',
+  \ 'complete_pattern': ':\s*',
+  \ 'popup_limit': 10,
+  \ 'on_complete': ['ncm2#on_complete#delay', 180, 'ncm2#on_complete#omni', 'javacomplete#Complete'],
+\ })
+
+""""""""""""""""""""""""""""""""""""""""""""""
+" Auto Complete Preview Settings
+""""""""""""""""""""""""""""""""""""""""""""""
+" Float preview
+let g:float_preview#docked = 1
+
+" IMPORTANTE: :help Ncm2PopupOpen for more information
+set completeopt=noinsert,menu,noselect
+"set completeopt=noinsert,menu,noselect,preview
+
+" Set delay to trigger auto complete
+let g:ncm2#complete_delay = 500
 
 """"""""""""""""""""""""""""""""""""""""""""""
 " General Setting
@@ -179,9 +228,6 @@ match ExtraWhitespace /\s\+\%#\@<!$/
 
 " enable ncm2 for all buffers
 autocmd BufEnter * call ncm2#enable_for_buffer()
-
-" IMPORTANTE: :help Ncm2PopupOpen for more information
-set completeopt=noinsert,menu,noselect,preview
 
 " suppress the annoying 'match x of y', 'The only match' and 'Pattern not
 " found' messages
@@ -385,13 +431,16 @@ let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
 let g:ale_statusline_format = [' %d', ' %d', '']
 
 """"""""""""""""""""""""""""""""""""""""""""""
-" Javascript Document plugin setting
+" Javascript plugin setting
 """"""""""""""""""""""""""""""""""""""""""""""
+" JSDoc
 let g:jsdoc_enable_es6 = 1
 let g:jsdoc_input_description = 1
 let g:jsdoc_allow_input_prompt = 1
 let g:jsdoc_return = 1
 let g:jsdoc_return_type = 1
+let g:javascript_plugin_jsdoc = 1
+let g:javascript_plugin_ngdoc = 1
 
 """"""""""""""""""""""""""""""""""""""""""""""
 " AG the silver searcher for vim.ack
