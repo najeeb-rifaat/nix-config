@@ -6,6 +6,7 @@ call plug#begin('~/.local/share/nvim/plugged')
 " Essentials
 Plug 'mileszs/ack.vim'
 Plug 'janko-m/vim-test'
+Plug 'kkoomen/vim-doge'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'Shougo/neco-syntax'
 Plug 'mhinz/vim-startify'
@@ -13,6 +14,7 @@ Plug 'itchyny/lightline.vim'
 Plug 'ryanoasis/vim-devicons'
 Plug 'airblade/vim-gitgutter'
 Plug 'editorconfig/editorconfig-vim'
+
 
 " Previews
 Plug 'majutsushi/tagbar'
@@ -51,7 +53,6 @@ Plug 'maximbaz/lightline-ale'
 
 " JS
 Plug 'mxw/vim-jsx', { 'for': 'javascript.jsx' }
-Plug 'heavenshell/vim-jsdoc', { 'for': 'javascript' }
 Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
 Plug 'ncm2/ncm2-tern', { 'do': 'npm install', 'for': 'javascript' }
 
@@ -98,7 +99,7 @@ nmap <C-t> :TagbarToggle<CR>
 " NCM2 wrap omnifuncs
 """"""""""""""""""""""""""""""""""""""""""""""
 " CSS/SCSS
-au User Ncm2Plugin call ncm2#register_source({
+autocmd User Ncm2Plugin call ncm2#register_source({
   \ 'name' : 'css',
   \ 'priority': 3,
   \ 'subscope_enable': 1,
@@ -110,7 +111,8 @@ au User Ncm2Plugin call ncm2#register_source({
 \ })
 
 " Java
-au User Ncm2Plugin call ncm2#register_source({
+let g:JavaComplete_EnableDefaultMappings = 0
+autocmd User Ncm2Plugin call ncm2#register_source({
   \ 'name' : 'java',
   \ 'priority': 3,
   \ 'subscope_enable': 1,
@@ -193,7 +195,7 @@ set ignorecase
 set smartcase
 
 " Return to last edit position when opening files (You want this!)
-au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
+autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 
 " Delete white space on-save
 " autocmd BufWritePre * :%s/\s\+$//e
@@ -291,6 +293,9 @@ map <Leader>s :%s/\<<C-r><C-w>\>/
 " Search and replace mapping
 map <Leader>f :Ack <C-r><C-w>
 map <Leader>d :/\<<C-r><C-w>\>/<CR>
+
+" Docs mapping
+map <Leader>d :DogeGenerate<CR>
 
 " Buffer Control mapping
 map <Leader>w :w<CR>
@@ -438,18 +443,6 @@ let g:ale_echo_msg_error_str = ''
 let g:ale_echo_msg_warning_str = ''
 let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
 let g:ale_statusline_format = [' %d', ' %d', '']
-
-""""""""""""""""""""""""""""""""""""""""""""""
-" Javascript plugin setting
-""""""""""""""""""""""""""""""""""""""""""""""
-" JSDoc
-let g:jsdoc_enable_es6 = 1
-let g:jsdoc_input_description = 1
-let g:jsdoc_allow_input_prompt = 1
-let g:jsdoc_return = 1
-let g:jsdoc_return_type = 1
-let g:javascript_plugin_jsdoc = 1
-let g:javascript_plugin_ngdoc = 1
 
 """"""""""""""""""""""""""""""""""""""""""""""
 " AG the silver searcher for vim.ack
