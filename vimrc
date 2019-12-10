@@ -57,7 +57,7 @@ Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
 Plug 'ncm2/ncm2-tern', { 'do': 'npm install', 'for': 'javascript' }
 
 " TS
-Plug 'ncm2/nvim-typescript', {'for': 'typescript', 'do': './install.sh'}
+"Plug 'ncm2/nvim-typescript', {'for': 'typescript', 'do': './install.sh'}
 
 " Go Lang
 Plug 'ncm2/ncm2-go', { 'for': 'go' }
@@ -100,7 +100,7 @@ nmap <C-t> :TagbarToggle<CR>
 """"""""""""""""""""""""""""""""""""""""""""""
 " CSS/SCSS
 autocmd User Ncm2Plugin call ncm2#register_source({
-  \ 'name' : 'css',
+  \ 'name' : 'scss',
   \ 'priority': 3,
   \ 'subscope_enable': 1,
   \ 'scope': ['css','scss'],
@@ -111,7 +111,6 @@ autocmd User Ncm2Plugin call ncm2#register_source({
 \ })
 
 " Java
-let g:JavaComplete_EnableDefaultMappings = 0
 autocmd User Ncm2Plugin call ncm2#register_source({
   \ 'name' : 'java',
   \ 'priority': 3,
@@ -123,6 +122,11 @@ autocmd User Ncm2Plugin call ncm2#register_source({
   \ 'popup_limit': 10,
   \ 'on_complete': ['ncm2#on_complete#delay', 180, 'ncm2#on_complete#omni', 'javacomplete#Complete'],
 \ })
+
+""""""""""""""""""""""""""""""""""""""""""""""
+" JavaComplete2 settings
+""""""""""""""""""""""""""""""""""""""""""""""
+let g:JavaComplete_EnableDefaultMappings = 0
 
 """"""""""""""""""""""""""""""""""""""""""""""
 " Auto Complete Preview Settings
@@ -488,7 +492,15 @@ let g:go_auto_type_info = 1
 " LSP setting
 """"""""""""""""""""""""""""""""""""""""""""""
 let g:LanguageClient_serverCommands = {
+  \ 'css': ['css-languageserver', '--stdio'],
+  \ 'less': ['css-languageserver', '--stdio'],
+  \ 'sass': ['css-languageserver', '--stdio'],
   \ 'javascript': ['javascript-typescript-stdio'],
+  \ 'javascript.jsx': ['javascript-typescript-stdio'],
   \ 'typescript': ['javascript-typescript-stdio'],
-  \ 'dart': ['dart_language_server']
+  \ 'typescript.tsx': ['javascript-typescript-stdio'],
+  \ 'dart': ['dart_language_server'],
+  \ 'java': ['jdtls', '-data', getcwd()],
   \ }
+  " checkout https://github.com/georgewfraser/java-language-server.git
+  "\ 'java': ['java-language-server']
