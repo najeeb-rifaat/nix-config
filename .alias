@@ -1,0 +1,8 @@
+#### Shorthands ###
+alias _='sudo'
+alias ..='cd ..'
+alias ll='ls -lah'
+alias ls='ls --color=auto'
+
+#### My Directories ###
+alias src='cd $HOME/src'
