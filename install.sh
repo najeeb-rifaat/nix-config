@@ -1,5 +1,9 @@
 #! /bin/bash
 
+# setup neovim
+pacman -S neovim python python-pip
+pip install --user yarp neovim
+
 # steup directories
 mkdir -p $HOME/.vim/{autoload,spell}
 mkdir -p $HOME/.config/nvim/{autoload,spell}
