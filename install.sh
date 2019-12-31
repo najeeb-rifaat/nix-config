@@ -1,7 +1,7 @@
 #! /bin/bash
 
 # setup neovim
-sudo pacman -S neovim python python-pip
+sudo pacman -S --noconfirm neovim python python-pip
 pip install --user yarp neovim
 
 # steup directories
