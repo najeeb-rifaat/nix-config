@@ -1,8 +1,11 @@
 #### Shorthands ###
-alias _='sudo'
-alias ..='cd ..'
+alias vi='nvim'
+alias vim='nvim'
 alias ll='ls -lah'
 alias ls='ls --color=auto'
+alias _='sudo'
+alias ..='cd ..'
+alias ....='cd ../..'
 
 #### My Directories ###
 alias src='cd $HOME/src'
