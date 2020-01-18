@@ -15,7 +15,6 @@ Plug 'ryanoasis/vim-devicons'
 Plug 'airblade/vim-gitgutter'
 Plug 'editorconfig/editorconfig-vim'
 
-
 " Previews
 Plug 'majutsushi/tagbar'
 Plug 'ncm2/float-preview.nvim'
@@ -39,7 +38,6 @@ Plug 'low-ghost/nerdtree-fugitive', { 'on':  'NERDTreeToggle' }
 
 " NCM2 Basics
 Plug 'ncm2/ncm2'
-Plug 'ncm2/ncm2-go'
 Plug 'ncm2/ncm2-path'
 Plug 'roxma/nvim-yarp'
 Plug 'ncm2/ncm2-bufword'
@@ -61,7 +59,8 @@ Plug 'ncm2/ncm2-tern', { 'do': 'npm install', 'for': 'javascript' }
 
 " Go Lang
 Plug 'ncm2/ncm2-go', { 'for': 'go' }
-Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries', 'for': 'go' }
+" disabled for heavy downloads
+"Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries', 'for': 'go' }
 
 " GQL
 Plug 'jparise/vim-graphql', { 'for': 'gql' }
@@ -81,14 +80,16 @@ Plug 'tpope/vim-haml', { 'for': [ 'css', 'scss', 'sass' ] }
 Plug 'dart-lang/dart-vim-plugin', { 'for': 'dart' }
 
 " Java lang
-Plug 'ObserverOfTime/ncm2-jc2', { 'for': ['java', 'jsp'] }
-Plug 'artur-shaik/vim-javacomplete2', { 'for': ['java', 'jsp'] }
+"Plug 'ObserverOfTime/ncm2-jc2', { 'for': [ 'java', 'jsp'] }
+"Plug 'artur-shaik/vim-javacomplete2', { 'for': [ 'java', 'jsp'] }
 
 " LanguageServer client for NeoVim.
 Plug 'autozimu/LanguageClient-neovim', { 'branch': 'next', 'do': 'bash install.sh' }
 
-call plug#end()
+" Experimental
+Plug 'neoclide/coc.nvim', {'branch': 'release', 'for': [ 'java', 'jsp'] }
 
+call plug#end()
 
 """"""""""""""""""""""""""""""""""""""""""""""
 " Ctag tagbar
@@ -108,19 +109,6 @@ autocmd User Ncm2Plugin call ncm2#register_source({
   \ 'word_pattern': '[\w\-]+',
   \ 'complete_pattern': ':\s*',
   \ 'on_complete': ['ncm2#on_complete#delay', 180, 'ncm2#on_complete#omni', 'csscomplete#CompleteCSS'],
-\ })
-
-" Java
-autocmd User Ncm2Plugin call ncm2#register_source({
-  \ 'name' : 'java',
-  \ 'priority': 3,
-  \ 'subscope_enable': 1,
-  \ 'scope': ['java','jsp'],
-  \ 'mark': 'java',
-  \ 'word_pattern': '[\w\-]+',
-  \ 'complete_pattern': ':\s*',
-  \ 'popup_limit': 10,
-  \ 'on_complete': ['ncm2#on_complete#delay', 180, 'ncm2#on_complete#omni', 'javacomplete#Complete'],
 \ })
 
 """"""""""""""""""""""""""""""""""""""""""""""
@@ -499,7 +487,8 @@ let g:LanguageClient_serverCommands = {
   \ 'typescript': ['javascript-typescript-stdio'],
   \ 'typescript.tsx': ['javascript-typescript-stdio'],
   \ 'dart': ['dart_language_server'],
-  \ 'java': ['jdtls', '-data', getcwd()],
   \ }
   " checkout https://github.com/georgewfraser/java-language-server.git
   "\ 'java': ['java-language-server']
+  "\ 'java': ['~/bin/jdtls', '-data', getcwd()],
+  "\ 'java': ['/Users/najeeb_rifaat/src/github.com/georgewfraser/java-language-server/dist/lang_server_mac.sh', getcwd()],
