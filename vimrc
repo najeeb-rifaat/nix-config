@@ -36,15 +36,6 @@ Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 Plug 'Xuyuanp/nerdtree-git-plugin', { 'on':  'NERDTreeToggle' }
 Plug 'low-ghost/nerdtree-fugitive', { 'on':  'NERDTreeToggle' }
 
-" NCM2 Basics
-Plug 'ncm2/ncm2'
-Plug 'ncm2/ncm2-path'
-Plug 'roxma/nvim-yarp'
-Plug 'ncm2/ncm2-bufword'
-Plug 'fgrsnau/ncm2-aspell'
-Plug 'filipekiss/ncm2-look.vim'
-Plug 'ncm2/ncm2-vim' | Plug 'Shougo/neco-vim'
-
 " Linting
 Plug 'w0rp/ale'
 Plug 'maximbaz/lightline-ale'
@@ -52,24 +43,12 @@ Plug 'maximbaz/lightline-ale'
 " JS
 Plug 'mxw/vim-jsx', { 'for': 'javascript.jsx' }
 Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
-Plug 'ncm2/ncm2-tern', { 'do': 'npm install', 'for': 'javascript' }
-
-" TS
-"Plug 'ncm2/nvim-typescript', {'for': 'typescript', 'do': './install.sh'}
 
 " Go Lang
-Plug 'ncm2/ncm2-go', { 'for': 'go' }
-" disabled for heavy downloads
-"Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries', 'for': 'go' }
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries', 'for': 'go' }
 
 " GQL
 Plug 'jparise/vim-graphql', { 'for': 'gql' }
-
-" Clang (C/CXX)
-Plug 'ncm2/ncm2-pyclang', { 'for': 'clang' }
-
-" Python
-Plug 'ncm2/ncm2-jedi', { 'for': 'python' }
 
 " CSS and Colors
 Plug 'ap/vim-css-color'
@@ -79,15 +58,8 @@ Plug 'tpope/vim-haml', { 'for': [ 'css', 'scss', 'sass' ] }
 " Dart Lang
 Plug 'dart-lang/dart-vim-plugin', { 'for': 'dart' }
 
-" Java lang
-"Plug 'ObserverOfTime/ncm2-jc2', { 'for': [ 'java', 'jsp'] }
-"Plug 'artur-shaik/vim-javacomplete2', { 'for': [ 'java', 'jsp'] }
-
-" LanguageServer client for NeoVim.
-Plug 'autozimu/LanguageClient-neovim', { 'branch': 'next', 'do': 'bash install.sh' }
-
-" Experimental
-Plug 'neoclide/coc.nvim', {'branch': 'release', 'for': [ 'java', 'jsp'] }
+" Language assist COC
+Plug 'neoclide/coc.nvim', {'branch': 'release' }
 
 call plug#end()
 
@@ -95,26 +67,6 @@ call plug#end()
 " Ctag tagbar
 """"""""""""""""""""""""""""""""""""""""""""""
 nmap <C-t> :TagbarToggle<CR>
-
-""""""""""""""""""""""""""""""""""""""""""""""
-" NCM2 wrap omnifuncs
-""""""""""""""""""""""""""""""""""""""""""""""
-" CSS/SCSS
-autocmd User Ncm2Plugin call ncm2#register_source({
-  \ 'name' : 'scss',
-  \ 'priority': 3,
-  \ 'subscope_enable': 1,
-  \ 'scope': ['css','scss'],
-  \ 'mark': 'css',
-  \ 'word_pattern': '[\w\-]+',
-  \ 'complete_pattern': ':\s*',
-  \ 'on_complete': ['ncm2#on_complete#delay', 180, 'ncm2#on_complete#omni', 'csscomplete#CompleteCSS'],
-\ })
-
-""""""""""""""""""""""""""""""""""""""""""""""
-" JavaComplete2 settings
-""""""""""""""""""""""""""""""""""""""""""""""
-let g:JavaComplete_EnableDefaultMappings = 0
 
 """"""""""""""""""""""""""""""""""""""""""""""
 " Auto Complete Preview Settings
@@ -125,9 +77,6 @@ let g:float_preview#docked = 1
 " IMPORTANTE: :help Ncm2PopupOpen for more information
 set completeopt=noinsert,menu,noselect
 "set completeopt=noinsert,menu,noselect,preview
-
-" Set delay to trigger auto complete
-let g:ncm2#complete_delay = 500
 
 """"""""""""""""""""""""""""""""""""""""""""""
 " General Setting
@@ -229,9 +178,6 @@ set clipboard=unnamed
 highlight ExtraWhitespace ctermbg=lightblue guibg=lightblue
 match ExtraWhitespace /\s\+\%#\@<!$/
 
-" enable ncm2 for all buffers
-autocmd BufEnter * call ncm2#enable_for_buffer()
-
 " suppress the annoying 'match x of y', 'The only match' and 'Pattern not
 " found' messages
 set shortmess+=c
@@ -247,11 +193,6 @@ inoremap <expr> <CR> (pumvisible() ? "\<c-y>\<cr>" : "\<CR>")
 " Use <TAB> to select the popup menu:
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Look enable
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:ncm2_look_enabled = 1
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Files, backups and undo
@@ -484,8 +425,6 @@ let g:LanguageClient_serverCommands = {
   \ 'sass': ['css-languageserver', '--stdio'],
   \ 'javascript': ['javascript-typescript-stdio'],
   \ 'javascript.jsx': ['javascript-typescript-stdio'],
-  \ 'typescript': ['javascript-typescript-stdio'],
-  \ 'typescript.tsx': ['javascript-typescript-stdio'],
   \ 'dart': ['dart_language_server'],
   \ }
   " checkout https://github.com/georgewfraser/java-language-server.git

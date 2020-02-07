@@ -3,9 +3,21 @@ alias vi='nvim'
 alias vim='nvim'
 alias ll='ls -lah'
 alias ls='ls --color=auto'
-alias _='sudo'
 alias ..='cd ..'
-alias ....='cd ../..'
+alias ...='cd ../..'
+
+#### Power ####
+alias halt='sudo systemctl halt'
+alias reboot='sudo systemctl reboot'
+alias poweroff='sudo systemctl poweroff'
 
 #### My Directories ###
 alias src='cd $HOME/src'
+
+#### SUDO ####
+alias yolo='sudo'
+alias _='sudo'
+
+#### Bluetooth ####
+alias bt-on='echo -e "power on\n" | bluetoothctl'
+alias bt-off='echo -e "power off\n" | bluetoothctl'
