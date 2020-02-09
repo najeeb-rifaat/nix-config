@@ -2,7 +2,7 @@
 cp -rf ./bin/** /usr/local/bin
 
 # Setup desktop tools
-sudo pacman -S --noconfirm ranger scrot 
+sudo pacman -S --noconfirm ranger scrot
 
 # setup neovim
 sudo pacman -S --noconfirm neovim python python-pip

@@ -15,8 +15,8 @@ alias poweroff='sudo systemctl poweroff'
 alias src='cd $HOME/src'
 
 #### SUDO ####
-alias yolo='sudo'
 alias _='sudo'
+alias yolo='sudo !!'
 
 #### Bluetooth ####
 alias bt-on='echo -e "power on\n" | bluetoothctl'
