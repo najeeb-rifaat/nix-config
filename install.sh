@@ -1,5 +1,8 @@
+# Pacman config
+sudo cp -rf $PWD/pacman.conf /etc/pacman.conf
+
 #! /bin/bash
-cp -rf ./bin/** /usr/local/bin
+cp -rf $PWD/bin/** /usr/local/bin
 
 # Setup desktop tools
 sudo pacman -S --noconfirm ranger scrot

@@ -16,7 +16,7 @@ alias src='cd $HOME/src'
 
 #### SUDO ####
 alias _='sudo'
-alias yolo='sudo !!'
+alias yolo='sudo'
 
 #### Bluetooth ####
 alias bt-on='echo -e "power on\n" | bluetoothctl'
