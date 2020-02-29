@@ -17,7 +17,6 @@ Plug 'editorconfig/editorconfig-vim'
 
 " Previews
 Plug 'majutsushi/tagbar'
-Plug 'ncm2/float-preview.nvim'
 
 " Markdown
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & npm install'  }
@@ -40,26 +39,16 @@ Plug 'low-ghost/nerdtree-fugitive', { 'on':  'NERDTreeToggle' }
 Plug 'w0rp/ale'
 Plug 'maximbaz/lightline-ale'
 
-" JS
-Plug 'mxw/vim-jsx', { 'for': 'javascript.jsx' }
-Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
-
-" Go Lang
-Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries', 'for': 'go' }
-
 " GQL
 Plug 'jparise/vim-graphql', { 'for': 'gql' }
 
 " CSS and Colors
 Plug 'ap/vim-css-color'
-Plug 'cakebaker/scss-syntax.vim', { 'for': [ 'css', 'scss', 'sass' ] }
 Plug 'tpope/vim-haml', { 'for': [ 'css', 'scss', 'sass' ] }
-
-" Dart Lang
-Plug 'dart-lang/dart-vim-plugin', { 'for': 'dart' }
+Plug 'cakebaker/scss-syntax.vim', { 'for': [ 'css', 'scss', 'sass' ] }
 
 " Language assist COC
-Plug 'neoclide/coc.nvim', {'branch': 'release' }
+Plug 'neoclide/coc.nvim', { 'branch': 'release' }
 
 call plug#end()
 
@@ -95,6 +84,9 @@ set guifont=SFMono\ Nerd\ Font:h14
 
 " Enable syntax highlights
 syntax on
+
+" More responsive
+set updatetime=300
 
 " Reduce re-renders
 set lazyredraw
@@ -236,8 +228,12 @@ map <Leader>Q :q!<CR>
 map <Leader>b :buffer
 
 " Tab Control mapping
-map <Leader>] :tabnext<CR>
-map <Leader>[ :tabprevious<CR>
+map <Leader>} :tabnext<CR>
+map <Leader>{ :tabprevious<CR>
+
+" Buffer Control mapping
+map <Leader>] :buffernext<CR>
+map <Leader>[ :bufferprevious<CR>
 
 " Pane resize mapping
 map <Leader>, :vertical resize +5<CR>
@@ -349,7 +345,7 @@ let g:lightline = {
 " ALE Setting
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Auto completion:
-let g:ale_completion_enabled = 1
+let g:ale_completion_enabled = 0
 
 " Auto fix on save:
 let g:ale_fix_on_save = 0
@@ -417,17 +413,11 @@ let g:go_auto_sameids = 1
 let g:go_auto_type_info = 1
 
 """"""""""""""""""""""""""""""""""""""""""""""
-" LSP setting
+" COC setting
 """"""""""""""""""""""""""""""""""""""""""""""
-let g:LanguageClient_serverCommands = {
-  \ 'css': ['css-languageserver', '--stdio'],
-  \ 'less': ['css-languageserver', '--stdio'],
-  \ 'sass': ['css-languageserver', '--stdio'],
-  \ 'javascript': ['javascript-typescript-stdio'],
-  \ 'javascript.jsx': ['javascript-typescript-stdio'],
-  \ 'dart': ['dart_language_server'],
-  \ }
-  " checkout https://github.com/georgewfraser/java-language-server.git
-  "\ 'java': ['java-language-server']
-  "\ 'java': ['~/bin/jdtls', '-data', getcwd()],
-  "\ 'java': ['/Users/najeeb_rifaat/src/github.com/georgewfraser/java-language-server/dist/lang_server_mac.sh', getcwd()],
+map <leader>r <Plug>(coc-rename)
+map <leader>R <Plug>(coc-reference)
+map <leader>d <Plug>(coc-definition)
+map <leader>D <Plug>(coc-type-definition)
+map <leader>i <Plug>(coc-implementation)
+map <leader><leader> <Plug>(coc-codeaction)
