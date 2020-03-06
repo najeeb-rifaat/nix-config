@@ -213,10 +213,10 @@ map <c-space> ?
 let mapleader="\\"
 
 " Search and replace mapping
-map <Leader>s :%s/\<<C-r><C-w>\>/
+map <Leader>s :Ack <C-r><C-w>
+map <Leader>S :%s/\<<C-r><C-w>\>/
 
 " Search and replace mapping
-map <Leader>f :Ack <C-r><C-w>
 map <Leader>d :/\<<C-r><C-w>\>/<CR>
 
 " Docs mapping
@@ -227,24 +227,35 @@ map <Leader>w :w<CR>
 map <Leader>Q :q!<CR>
 map <Leader>b :buffer
 
-" Tab Control mapping
+" Buffer navigation mapping
+map <Leader>] :bn<CR>
+map <Leader>[ :bp<CR>
+
+" Tab navigation mapping
 map <Leader>} :tabnext<CR>
 map <Leader>{ :tabprevious<CR>
 
-" Buffer Control mapping
-map <Leader>] :buffernext<CR>
-map <Leader>[ :bufferprevious<CR>
-
-" Pane resize mapping
+" Pane resizS mapping
 map <Leader>, :vertical resize +5<CR>
 map <Leader>. :vertical resize -5<CR>
 
+" Zoom / Restore window mapping
+function! s:ZoomToggle() abort
+    if exists('t:zoomed') && t:zoomed
+        execute t:zoom_winrestcmd
+        let t:zoomed = 0
+    else
+        let t:zoom_winrestcmd = winrestcmd()
+        resize
+        vertical resize
+        let t:zoomed = 1
+    endif
+endfunction
+command! ZoomToggle call s:ZoomToggle()
+nnoremap <leader>z :ZoomToggle<CR>
+
 " VIM Test mapping
 map <Leader>t :TestNearest<CR>
-
-" VIM Tern mapping
-map <Leader>jd :TernDefPreview<CR>
-map <Leader>jr :TernRename<CR>
 
 " Move VISUAL LINE selection within buffer.
 xnoremap <silent> K :call najeeb#functions#move_selection_up()<CR>
@@ -420,4 +431,5 @@ map <leader>R <Plug>(coc-reference)
 map <leader>d <Plug>(coc-definition)
 map <leader>D <Plug>(coc-type-definition)
 map <leader>i <Plug>(coc-implementation)
+map <leader>f <Plug>(coc-format-selected)
 map <leader><leader> <Plug>(coc-codeaction)
