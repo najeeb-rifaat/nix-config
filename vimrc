@@ -231,21 +231,6 @@ set nowb
 set nobackup
 set noswapfile
 
-""""""""""""""""""""""""""""""""""""""""""""""
-" Highlight Setting
-""""""""""""""""""""""""""""""""""""""""""""""
-" Highlight search matches
-set hlsearch
-
-" Set Highlights color and style
-highlight clear SpellBad
-highlight SpellBad cterm=underline
-highlight Search guibg=#9E1199 ctermfg=White
-highlight Error ctermbg=Yellow ctermfg=Black cterm=underline,italic
-
-" Use lightgreen for highlight on extra traiting spaces
-highlight ExtraWhitespace ctermbg=lightblue guibg=lightblue
-match ExtraWhitespace /\s\+\%#\@<!$/
 
 """"""""""""""""""""""""""""""""""""""""""""""
 " General Setting
@@ -374,3 +359,19 @@ xnoremap <silent> <space> :call najeeb#functions#clean_useless_spaces()<CR>
 
 " Remove useless spaces
 map <leader><space> :%s/\s\+$//<CR>
+
+""""""""""""""""""""""""""""""""""""""""""""""
+" Highlight Setting
+""""""""""""""""""""""""""""""""""""""""""""""
+" Highlight search matches
+set hlsearch
+
+" Set Highlights color and style
+highlight clear SpellBad
+highlight SpellBad cterm=underline
+highlight Search guibg=#9E1199 ctermfg=White
+highlight Error ctermbg=Yellow ctermfg=Black cterm=underline
+
+" Use lightgreen for highlight on extra traiting spaces
+highlight ExtraWhitespace ctermbg=lightblue guibg=lightblue
+match ExtraWhitespace /\s\+\%#\@<!$/
