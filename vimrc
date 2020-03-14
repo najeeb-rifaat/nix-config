@@ -1,5 +1,5 @@
 """"""""""""""""""""""""""""""""""""""""""""""
-" Enable -Plug- the plug-in manager
+" Enable *Plug* the plug-in manager
 """"""""""""""""""""""""""""""""""""""""""""""
 call plug#begin('~/.local/share/nvim/plugged')
 
@@ -149,22 +149,22 @@ set laststatus=2
 
 " LightLine:
 let g:lightline = {
-      \ 'colorscheme': 'wombat',
-      \ 'active': {
-      \   'left': [
-      \				[ 'mode', 'paste' ],
-      \				[ 'filename', 'modified' ]
-      \			],
-      \	  'right':[
-      \				[ 'lineinfo' ],
-      \				[ 'fileencoding', 'percent' ],
-      \				[ 'linter_errors', 'linter_warnings', 'gitbranch' ]
-      \			]
-      \ },
-      \ 'component_function': {
-      \   'gitbranch': 'fugitive#head'
-      \ },
-      \ }
+  \   'colorscheme': 'wombat',
+  \   'active': {
+  \     'left': [
+  \   			[ 'mode', 'paste' ],
+  \   			[ 'filename', 'modified' ]
+  \   		],
+  \     'right':[
+  \   			[ 'lineinfo' ],
+  \   			[ 'fileencoding', 'percent' ],
+  \   			[ 'linter_errors', 'linter_warnings', 'gitbranch' ]
+  \   		]
+  \   },
+  \   'component_function': {
+  \     'gitbranch': 'fugitive#head'
+  \   },
+  \ }
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " CodeLint - Setting
@@ -187,8 +187,8 @@ let g:lightline.component_expand = {
   \ }
 
 let g:lightline.component_type = {
-  \     'linter_warnings': 'warning',
-  \     'linter_errors': 'error',
+  \  'linter_warnings': 'warning',
+  \  'linter_errors': 'error',
   \ }
 
 " Show errors in LightLine:
@@ -204,16 +204,16 @@ map <Leader>e :ALENext<CR>
 " CodeCompletion - setting
 """"""""""""""""""""""""""""""""""""""""""""""
 let g:coc_global_extensions = [
-      \  'coc-angular',
-      \  'coc-css',
-      \  'coc-eslint',
-      \  'coc-html',
-      \  'coc-java',
-      \  'coc-json',
-      \  'coc-omnisharp',
-      \  'coc-tsserver',
-      \  'coc-yank'
-      \ ]
+  \   'coc-angular',
+  \   'coc-css',
+  \   'coc-eslint',
+  \   'coc-html',
+  \   'coc-java',
+  \   'coc-json',
+  \   'coc-omnisharp',
+  \   'coc-tsserver',
+  \   'coc-yank'
+  \ ]
 
 map <leader>r <Plug>(coc-rename)
 map <leader>R <Plug>(coc-reference)
@@ -230,7 +230,6 @@ map <leader><leader> <Plug>(coc-codeaction)
 set nowb
 set nobackup
 set noswapfile
-
 
 """"""""""""""""""""""""""""""""""""""""""""""
 " General Setting
@@ -369,7 +368,7 @@ set hlsearch
 " Set Highlights color and style
 highlight clear SpellBad
 highlight SpellBad cterm=underline
-highlight Search guibg=#9E1199 ctermfg=White
+highlight Search ctermbg=LightGreen ctermfg=Black
 highlight Error ctermbg=Yellow ctermfg=Black cterm=underline
 
 " Use lightgreen for highlight on extra traiting spaces
