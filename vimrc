@@ -204,7 +204,7 @@ map <Leader>e :ALENext<CR>
 " CodeCompletion - setting
 """"""""""""""""""""""""""""""""""""""""""""""
 let g:coc_global_extensions = [
-      \  'coc-angualr',
+      \  'coc-angular',
       \  'coc-css',
       \  'coc-eslint',
       \  'coc-html',
