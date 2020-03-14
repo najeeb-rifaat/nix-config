@@ -203,6 +203,18 @@ map <Leader>e :ALENext<CR>
 """"""""""""""""""""""""""""""""""""""""""""""
 " CodeCompletion - setting
 """"""""""""""""""""""""""""""""""""""""""""""
+let g:coc_global_extensions = [
+      \  'coc-angualr',
+      \  'coc-css',
+      \  'coc-eslint',
+      \  'coc-html',
+      \  'coc-java',
+      \  'coc-json',
+      \  'coc-omnisharp',
+      \  'coc-tsserver',
+      \  'coc-yank'
+      \ ]
+
 map <leader>r <Plug>(coc-rename)
 map <leader>R <Plug>(coc-reference)
 map <leader>d <Plug>(coc-definition)
