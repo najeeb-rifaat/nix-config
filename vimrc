@@ -7,6 +7,7 @@ call plug#begin('~/.local/share/nvim/plugged')
 Plug 'mhinz/vim-startify'
 Plug 'ryanoasis/vim-devicons'
 Plug 'editorconfig/editorconfig-vim'
+Plug 'christoomey/vim-tmux-navigator'
 
 " ColorSchemes
 Plug 'flazz/vim-colorschemes'
