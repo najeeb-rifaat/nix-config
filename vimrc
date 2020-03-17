@@ -213,7 +213,10 @@ let g:coc_global_extensions = [
   \   'coc-json',
   \   'coc-omnisharp',
   \   'coc-tsserver',
-  \   'coc-yank'
+  \   'coc-python',
+  \   'coc-yank',
+  \   'coc-git',
+  \   'coc-spell-checker'
   \ ]
 
 map <leader>r <Plug>(coc-rename)
