@@ -215,7 +215,6 @@ let g:coc_global_extensions = [
   \   'coc-tsserver',
   \   'coc-python',
   \   'coc-yank',
-  \   'coc-git',
   \   'coc-spell-checker'
   \ ]
 
