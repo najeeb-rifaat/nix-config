@@ -374,6 +374,11 @@ highlight SpellBad cterm=underline
 highlight Search ctermbg=LightGreen ctermfg=Black
 highlight Error ctermbg=Yellow ctermfg=Black cterm=underline
 
+highlight DiffAdd ctermbg=lightblue ctermfg=Black
+highlight DiffChange ctermbg=gray ctermfg=Black
+highlight DiffText ctermbg=blue ctermfg=Black cterm=underline
+highlight DiffDelete ctermbg=yellow ctermfg=Black
+
 " Use lightgreen for highlight on extra traiting spaces
 highlight ExtraWhitespace ctermbg=lightblue guibg=lightblue
 match ExtraWhitespace /\s\+\%#\@<!$/
