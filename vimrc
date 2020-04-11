@@ -370,13 +370,13 @@ set hlsearch
 
 " Set Highlights color and style
 highlight clear SpellBad
-highlight SpellBad cterm=underline
-highlight Search ctermbg=LightGreen ctermfg=Black
+highlight SpellBad cterm=underline,italic
+highlight Search ctermbg=DarkBlue ctermfg=Black cterm=bold,underline
 highlight Error ctermbg=Yellow ctermfg=Black cterm=underline
 
 highlight DiffAdd ctermbg=lightblue ctermfg=Black
-highlight DiffChange ctermbg=gray ctermfg=Black
-highlight DiffText ctermbg=blue ctermfg=Black cterm=underline
+highlight DiffChange ctermbg=none ctermfg=none cterm=underline
+highlight DiffText ctermbg=green ctermfg=Black cterm=underline
 highlight DiffDelete ctermbg=yellow ctermfg=Black
 
 " Use lightgreen for highlight on extra traiting spaces
