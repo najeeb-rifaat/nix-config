@@ -304,7 +304,7 @@ set nofoldenable
 set foldmethod=syntax
 
 " Set columns ruler
-set colorcolumn=80
+set colorcolumn=81,99
 
 " Set cursor line highlight
 set cursorline
@@ -365,20 +365,29 @@ map <leader><space> :%s/\s\+$//<CR>
 """"""""""""""""""""""""""""""""""""""""""""""
 " Highlight Setting
 """"""""""""""""""""""""""""""""""""""""""""""
-" Highlight search matches
+" Highlight search matche highlights
 set hlsearch
+highlight Search cterm=standout
 
-" Set Highlights color and style
+" Set error highlights
+highlight Error ctermbg=Yello ctermfg=White cterm=underline
+
+" Set Spelling mistake highlights
 highlight clear SpellBad
-highlight SpellBad cterm=underline,italic
-highlight Search ctermbg=DarkBlue ctermfg=Black cterm=bold,underline
-highlight Error ctermbg=Yellow ctermfg=Black cterm=underline
+highlight SpellBad cterm=italic,underline
+highlight SpellCap ctermbg=none cterm=bold,underline
 
+" Set git diff highlights
+highlight DiffChange ctermbg=green ctermfg=none
 highlight DiffAdd ctermbg=lightblue ctermfg=Black
-highlight DiffChange ctermbg=none ctermfg=none cterm=underline
-highlight DiffText ctermbg=green ctermfg=Black cterm=underline
-highlight DiffDelete ctermbg=yellow ctermfg=Black
+highlight DiffText ctermbg=lightblue ctermfg=Black cterm=underline
+highlight DiffDelete ctermbg=yellow ctermfg=Black cterm=strikethrough
+
+" Set column ruler highlight
+highlight colorcolumn ctermbg=red ctermfg=yellow cterm=strikethrough,bold
 
 " Use lightgreen for highlight on extra traiting spaces
-highlight ExtraWhitespace ctermbg=lightblue guibg=lightblue
-match ExtraWhitespace /\s\+\%#\@<!$/
+highlight UnwanttedTab ctermbg=lightblue guibg=lightblue
+highlight TrailSpace ctermbg=lightblue guibg=lightblue
+match UnwanttedTab /\t/
+match TrailSpace / \+$/
