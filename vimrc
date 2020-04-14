@@ -50,6 +50,9 @@ Plug 'neoclide/coc.nvim', { 'branch': 'release' }
 " GQL
 Plug 'jparise/vim-graphql', { 'for': 'gql' }
 
+" Indentation Line
+Plug 'Yggdroot/indentLine'
+
 " CSS and Colors
 Plug 'ap/vim-css-color'
 Plug 'tpope/vim-haml', { 'for': [ 'css', 'scss', 'sass' ] }
@@ -363,6 +366,17 @@ xnoremap <silent> <space> :call najeeb#functions#clean_useless_spaces()<CR>
 map <leader><space> :%s/\s\+$//<CR>
 
 """"""""""""""""""""""""""""""""""""""""""""""
+" Indent line Setting
+""""""""""""""""""""""""""""""""""""""""""""""
+let g:indentLine_char_list = ['|', '¦', '┆', '┊']
+
+""""""""""""""""""""""""""""""""""""""""""""""
+" Line flow Setting
+""""""""""""""""""""""""""""""""""""""""""""""
+set listchars=tab:>-,trail:~,extends:+,precedes:<
+set list
+
+""""""""""""""""""""""""""""""""""""""""""""""
 " Highlight Setting
 """"""""""""""""""""""""""""""""""""""""""""""
 " Highlight search matche highlights
@@ -370,7 +384,10 @@ set hlsearch
 highlight Search cterm=standout
 
 " Set error highlights
-highlight Error ctermbg=Yello ctermfg=White cterm=underline
+highlight Error ctermbg=Yellow ctermfg=White cterm=underline
+
+" Set todo highlights
+highlight Todo ctermbg=LightYellow cterm=italic,bold
 
 " Set Spelling mistake highlights
 highlight clear SpellBad
@@ -378,16 +395,16 @@ highlight SpellBad cterm=italic,underline
 highlight SpellCap ctermbg=none cterm=bold,underline
 
 " Set git diff highlights
-highlight DiffChange ctermbg=green ctermfg=none
-highlight DiffAdd ctermbg=lightblue ctermfg=Black
-highlight DiffText ctermbg=lightblue ctermfg=Black cterm=underline
-highlight DiffDelete ctermbg=yellow ctermfg=Black cterm=strikethrough
+highlight DiffChange ctermbg=Green ctermfg=none
+highlight DiffAdd ctermbg=LightBlue ctermfg=Black
+highlight DiffText ctermbg=LightBlue ctermfg=Black cterm=underline
+highlight DiffDelete ctermbg=Yellow ctermfg=Black cterm=strikethrough
 
 " Set column ruler highlight
-highlight colorcolumn ctermbg=red ctermfg=yellow cterm=strikethrough,bold
+highlight colorcolumn ctermbg=Red ctermfg=Yellow cterm=strikethrough,bold
 
 " Use lightgreen for highlight on extra traiting spaces
-highlight UnwanttedTab ctermbg=lightblue guibg=lightblue
-highlight TrailSpace ctermbg=lightblue guibg=lightblue
+highlight UnwanttedTab ctermbg=LightBlue ctermfg=Green
+highlight TrailSpace ctermbg=LightBlue ctermfg=Green
 match UnwanttedTab /\t/
 match TrailSpace / \+$/
