@@ -384,7 +384,7 @@ set hlsearch
 highlight Search cterm=standout
 
 " Set error highlights
-highlight Error ctermbg=Yellow ctermfg=White cterm=underline
+highlight Error ctermbg=Yellow ctermfg=Black cterm=underline
 
 " Set todo highlights
 highlight Todo ctermbg=LightYellow cterm=italic,bold
