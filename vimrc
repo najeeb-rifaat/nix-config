@@ -311,6 +311,7 @@ set colorcolumn=81,99
 
 " Set cursor line highlight
 set cursorline
+set cursorcolumn
 
 " Use system clipboard
 set clipboard=unnamed
