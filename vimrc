@@ -102,7 +102,7 @@ let g:ctrlp_by_filename = 1
 set wildignore+=*/tmp/*,*/node_modules/*,*/ios/*,*/android/*,*.so,*.swp,*.zip
 let g:ctrlp_custom_ignore = {
   \ 'dir':  '\v[\/]\.(git|hg|svn)$',
-  \ 'file': '\v\.(exe|so|dll|DS_store)$',
+  \ 'file': '\v\.(exe|so|dll|DS_store|class)$',
   \ }
 
 " Set working path to nearest root
@@ -324,7 +324,7 @@ set shortmess+=c
 inoremap <c-c> <ESC>
 
 """"""""""""""""""""""""""""""""""""""""""""""
-" Custome Key mapping
+" Custom Key mapping
 """"""""""""""""""""""""""""""""""""""""""""""
 " Disable arrow keys
 map <up> <nop>
@@ -366,6 +366,9 @@ xnoremap <silent> <space> :call najeeb#functions#clean_useless_spaces()<CR>
 " Remove useless spaces
 map <leader><space> :%s/\s\+$//<CR>
 
+" Map terminal mode switch
+tnoremap <Esc> <C-\><C-n>
+
 """"""""""""""""""""""""""""""""""""""""""""""
 " Indent line Setting
 """"""""""""""""""""""""""""""""""""""""""""""
@@ -380,14 +383,15 @@ set list
 """"""""""""""""""""""""""""""""""""""""""""""
 " Highlight Setting
 """"""""""""""""""""""""""""""""""""""""""""""
-" Highlight search matche highlights
+" Highlight search match highlights
 set hlsearch
-highlight Search cterm=standout
+highlight Search ctermbg=Grey ctermfg=Red cterm=bold,underline
 
 " Set error highlights
-highlight Error ctermbg=Yellow ctermfg=Black cterm=underline
+highlight Error ctermbg=Yellow ctermfg=White cterm=underline
+highlight CocErrorSign ctermfg=Yellow
 
-" Set todo highlights
+" Set TODO highlights
 highlight Todo ctermbg=LightYellow cterm=italic,bold
 
 " Set Spelling mistake highlights
@@ -395,16 +399,16 @@ highlight clear SpellBad
 highlight SpellBad cterm=italic,underline
 highlight SpellCap ctermbg=none cterm=bold,underline
 
-" Set git diff highlights
+" Set git Diff highlights
 highlight DiffChange ctermbg=Green ctermfg=none
 highlight DiffAdd ctermbg=LightBlue ctermfg=Black
 highlight DiffText ctermbg=LightBlue ctermfg=Black cterm=underline
 highlight DiffDelete ctermbg=Yellow ctermfg=Black cterm=strikethrough
 
 " Set column ruler highlight
-highlight colorcolumn ctermbg=Red ctermfg=Yellow cterm=strikethrough,bold
+highlight colorcolumn ctermbg=Red ctermfg=Yellow
 
-" Use lightgreen for highlight on extra traiting spaces
+" Use LightBlue for highlight on extra traiting spaces
 highlight UnwanttedTab ctermbg=LightBlue ctermfg=Green
 highlight TrailSpace ctermbg=LightBlue ctermfg=Green
 match UnwanttedTab /\t/

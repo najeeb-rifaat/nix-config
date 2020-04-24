@@ -33,6 +33,9 @@ ln -sfn $PWD/spell $HOME/.config/nvim/spell
 # install tern config
 ln -sfn $PWD/tern $HOME/.tern-config
 
+# install XResources config
+ln -sfn $PWD/xresources $HOME/.Xresources
+
 # install tern config
 cp -f $PWD/.env $HOME/.env
 cp -f $PWD/.alias $HOME/.alias
