@@ -156,14 +156,14 @@ let g:lightline = {
   \   'colorscheme': 'wombat',
   \   'active': {
   \     'left': [
-  \   			[ 'mode', 'paste' ],
-  \   			[ 'filename', 'modified' ]
-  \   		],
+  \         [ 'mode', 'paste' ],
+  \         [ 'filename', 'modified' ]
+  \       ],
   \     'right':[
-  \   			[ 'lineinfo' ],
-  \   			[ 'fileencoding', 'percent' ],
-  \   			[ 'linter_errors', 'linter_warnings', 'gitbranch' ]
-  \   		]
+  \         [ 'lineinfo' ],
+  \         [ 'fileencoding', 'percent' ],
+  \         [ 'linter_errors', 'linter_warnings', 'gitbranch' ]
+  \       ]
   \   },
   \   'component_function': {
   \     'gitbranch': 'fugitive#head'
@@ -200,6 +200,12 @@ let g:ale_echo_msg_error_str = ''
 let g:ale_echo_msg_warning_str = ''
 let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
 let g:ale_statusline_format = [' %d', ' %d', '']
+
+" Explicitly disable csc linter for c#
+let g:ale_linters_ignore = {
+  \    'cs': ['csc', 'mcsc'],
+  \    'java': [ 'javac' ]
+  \  }
 
 " ALE cycle errors
 map <Leader>e :ALENext<CR>
@@ -407,6 +413,9 @@ highlight DiffDelete ctermbg=Yellow ctermfg=Black cterm=strikethrough
 
 " Set column ruler highlight
 highlight colorcolumn ctermbg=Red ctermfg=Yellow
+
+" No gutter highlights
+highlight clear SignColumn
 
 " Use LightBlue for highlight on extra traiting spaces
 highlight UnwanttedTab ctermbg=LightBlue ctermfg=Green
