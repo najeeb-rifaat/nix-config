@@ -58,6 +58,9 @@ Plug 'ap/vim-css-color'
 Plug 'tpope/vim-haml', { 'for': [ 'css', 'scss', 'sass' ] }
 Plug 'cakebaker/scss-syntax.vim', { 'for': [ 'css', 'scss', 'sass' ] }
 
+" Dart syntax
+Plug 'dart-lang/dart-vim-plugin', { 'for': 'dart' }
+
 call plug#end()
 
 """"""""""""""""""""""""""""""""""""""""""""""
@@ -223,6 +226,7 @@ let g:coc_global_extensions = [
   \   'coc-omnisharp',
   \   'coc-tsserver',
   \   'coc-python',
+  \   'coc-flutter',
   \   'coc-yank',
   \   'coc-spell-checker'
   \ ]
