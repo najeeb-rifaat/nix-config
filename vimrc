@@ -138,21 +138,21 @@ set laststatus=2
 
 " LightLine:
 let g:lightline = {
-  \   'colorscheme': 'wombat',
+  \   'colorscheme': 'jellybeans',
   \   'active': {
   \     'left': [
   \         [ 'mode', 'paste' ],
-  \         [ 'filename', 'modified' ]
+  \         [ 'gitbranch', 'filename', 'modified' ]
   \       ],
   \     'right':[
   \         [ 'lineinfo' ],
   \         [ 'fileencoding', 'percent' ],
-  \         [ 'linter_errors', 'linter_warnings', 'gitbranch' ]
+  \         [ 'linter_errors', 'linter_warnings', 'linter_checking', 'linter_infos' ]
   \       ]
   \   },
-  \   'component_function': {
-  \     'gitbranch': 'fugitive#head'
-  \   },
+  \  'component_function': {
+  \    'gitbranch': 'FugitiveHead'
+  \  },
   \ }
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
