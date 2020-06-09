@@ -30,7 +30,7 @@ Plug 'janko-m/vim-test'
 
 " Search
 Plug 'mileszs/ack.vim'
-Plug 'ctrlpvim/ctrlp.vim'
+Plug 'junegunn/fzf.vim'
 
 " FileManager
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
@@ -98,27 +98,9 @@ map <Leader>t :TestNearest<CR>
 """"""""""""""""""""""""""""""""""""""""""""""
 " Search - Setting
 """"""""""""""""""""""""""""""""""""""""""""""
-" Use file name not directory
-let g:ctrlp_by_filename = 1
-
-" Set ignored paths
-set wildignore+=*/tmp/*,*/node_modules/*,*/ios/*,*/android/*,*.so,*.swp,*.zip
-let g:ctrlp_custom_ignore = {
-  \ 'dir':  '\v[\/]\.(git|hg|svn)$',
-  \ 'file': '\v\.(exe|so|dll|DS_store|class)$',
-  \ }
-
-" Set working path to nearest root
-let g:ctrlp_working_path_mode = 'ra'
-
-" Enable Lazy mode (Do NOT fucking until I stop for 250MS)
-let g:ctrlp_lazy_update = 250
-
-" Set match window location and behaviour
-let g:ctrlp_match_window = 'bottom,order:btt,min:5,max:25,results:25'
-
-" Set Max depth of directories
-let g:ctrlp_max_depth = 10
+nmap <C-p> :Files<CR>
+nmap <C-o> :Buffers<CR>
+nmap <C-s> :Rg<CR>
 
 " AG the silver searcher for vim.ack
 " Map silver searcher
@@ -188,14 +170,19 @@ let g:ale_sign_warning = ''
 
 " set LightLine info
 let g:lightline.component_expand = {
+  \  'linter_checking': 'lightline#ale#checking',
+  \  'linter_infos': 'lightline#ale#infos',
   \  'linter_warnings': 'lightline#ale#warnings',
   \  'linter_errors': 'lightline#ale#errors',
   \  'linter_ok': 'lightline#ale#ok',
   \ }
 
 let g:lightline.component_type = {
+  \  'linter_checking': 'right',
+  \  'linter_infos': 'right',
   \  'linter_warnings': 'warning',
   \  'linter_errors': 'error',
+  \  'linter_ok': 'right',
   \ }
 
 " Show errors in LightLine:
@@ -211,7 +198,7 @@ let g:ale_linters_ignore = {
   \  }
 
 " ALE cycle errors
-map <Leader>e :ALENext<CR>
+map <Leader>e :ALENextWrap<CR>
 
 """"""""""""""""""""""""""""""""""""""""""""""
 " CodeCompletion - setting
@@ -232,7 +219,7 @@ let g:coc_global_extensions = [
   \ ]
 
 map <leader>r <Plug>(coc-rename)
-map <leader>R <Plug>(coc-reference)
+map <leader>R <Plug>(coc-references)
 map <leader>d <Plug>(coc-definition)
 map <leader>D <Plug>(coc-type-definition)
 map <leader>i <Plug>(coc-implementation)
@@ -246,6 +233,9 @@ map <leader><leader> <Plug>(coc-codeaction)
 set nowb
 set nobackup
 set noswapfile
+
+" allow edit of hidden buffers
+set hidden
 
 """"""""""""""""""""""""""""""""""""""""""""""
 " General Setting
@@ -333,7 +323,7 @@ set shortmess+=c
 " CTRL-C doesn't trigger the InsertLeave autocmd . map to <ESC> instead.
 inoremap <c-c> <ESC>
 
-""""""""""""""""""""""""""""""""""""""""""""""
+"""""""""""""""""""""""""""""""""""""""""""""
 " Custom Key mapping
 """"""""""""""""""""""""""""""""""""""""""""""
 " Disable arrow keys
@@ -344,12 +334,6 @@ map <right> <nop>
 
 " Set <Leader> key
 let mapleader="\\"
-
-" Search and replace mapping
-map <Leader>S :%s/\<<C-r><C-w>\>/
-
-" Search and replace mapping
-map <Leader>d :/\<<C-r><C-w>\>/<CR>
 
 " Buffer Control mapping
 map <Leader>w :w<CR>
