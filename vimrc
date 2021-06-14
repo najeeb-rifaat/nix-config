@@ -332,7 +332,7 @@ set cursorline
 set cursorcolumn
 
 " Use system clipboard
-set clipboard=unnamed
+set clipboard=unnamedplus
 
 " suppress the annoying 'match x of y', 'The only match' and 'Pattern not
 " found' messages

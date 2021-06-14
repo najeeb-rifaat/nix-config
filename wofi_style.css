@@ -1,0 +1,21 @@
+@define-color background #292b2e;
+@define-color foreground #268bd2;
+@define-color accent #8EC37E;
+
+window {
+    opacity: 0.9;
+    border: 0px;
+    border-radius: 10px;
+    font-family: monospace;
+    font-size: 18px;
+}
+
+#input {
+  border-radius: 10px 10px 0px 0px;
+  border: 1px solid @accent;
+  padding: 10px;
+  margin: 0px;
+  font-size: 32px;
+  color: @accent;
+  background-color: @background;
+}
