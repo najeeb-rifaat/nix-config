@@ -30,6 +30,7 @@ Plug 'janko-m/vim-test'
 
 " Search
 Plug 'mileszs/ack.vim'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 
 " FileManager
@@ -60,6 +61,11 @@ Plug 'cakebaker/scss-syntax.vim', { 'for': [ 'css', 'scss', 'sass' ] }
 
 " Dart syntax
 Plug 'dart-lang/dart-vim-plugin', { 'for': 'dart' }
+
+" Snippets
+Plug 'mattn/emmet-vim'
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
 
 call plug#end()
 
@@ -100,7 +106,7 @@ map <Leader>t :TestNearest<CR>
 """"""""""""""""""""""""""""""""""""""""""""""
 nmap <C-p> :Files<CR>
 nmap <C-o> :Buffers<CR>
-nmap <C-s> :Rg<CR>
+nmap <C-s> :Ag<CR>
 
 " AG the silver searcher for vim.ack
 " Map silver searcher
@@ -204,18 +210,15 @@ map <Leader>e :ALENextWrap<CR>
 " CodeCompletion - setting
 """"""""""""""""""""""""""""""""""""""""""""""
 let g:coc_global_extensions = [
-  \   'coc-angular',
   \   'coc-css',
-  \   'coc-eslint',
   \   'coc-html',
   \   'coc-java',
-  \   'coc-json',
-  \   'coc-omnisharp',
-  \   'coc-tsserver',
   \   'coc-python',
+  \   'coc-eslint',
   \   'coc-flutter',
-  \   'coc-yank',
-  \   'coc-spell-checker'
+  \   'coc-omnisharp',
+  \   'coc-emmet',
+  \   'coc-snippets'
   \ ]
 
 map <leader>r <Plug>(coc-rename)
@@ -226,6 +229,21 @@ map <leader>i <Plug>(coc-implementation)
 map <leader>f <Plug>(coc-format-selected)
 map <leader><leader> <Plug>(coc-codeaction)
 
+" Use K to show documentation in preview window.
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  elseif (coc#rpc#ready())
+    call CocActionAsync('doHover')
+  else
+    execute '!' . &keywordprg . " " . expand('<cword>')
+  endif
+endfunction
+
+" Highlight the symbol and its references when holding the cursor.
+autocmd CursorHold * silent call CocActionAsync('highlight')
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Files, backups and undo
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -322,6 +340,9 @@ set shortmess+=c
 
 " CTRL-C doesn't trigger the InsertLeave autocmd . map to <ESC> instead.
 inoremap <c-c> <ESC>
+
+" set tags binary
+let tagbar_ctags_bin = "uctags"
 
 """""""""""""""""""""""""""""""""""""""""""""
 " Custom Key mapping
