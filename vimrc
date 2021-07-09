@@ -216,8 +216,8 @@ let g:coc_global_extensions = [
   \   'coc-python',
   \   'coc-eslint',
   \   'coc-flutter',
-  \   'coc-omnisharp',
   \   'coc-emmet',
+  \   'coc-omnisharp',
   \   'coc-snippets'
   \ ]
 
