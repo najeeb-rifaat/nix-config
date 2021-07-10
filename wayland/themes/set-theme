@@ -1,0 +1,5 @@
+gsettings set org.gnome.desktop.interface icon-theme Arc-Dark
+gsettings set org.gnome.desktop.interface gtk-theme Arc-Dark
+
+sudo ln -sf $PWD/gtkrc /usr/share/gtk-2.0/gtkrc
+sudo ln -sf $PWD/settings.init /usr/share/gtk-3.0/settings.ini
