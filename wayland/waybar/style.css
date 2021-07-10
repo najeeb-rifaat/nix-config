@@ -1,0 +1,47 @@
+@define-color background #292b2e;
+@define-color foreground #ffffdd;
+@define-color accent aqua;
+
+* {
+  font-size: 18px;
+  font-family: "SF Mono", monospace;
+}
+
+window#waybar {
+  background: @background;
+}
+
+#workspaces button.focused {
+  color: @foreground;
+  border-radius: 5px;
+  border: 1px dotted @accent;
+}
+
+#window{
+  color: @foreground;
+  font-weight: bold;
+  border-bottom: 1px solid @accent;
+  padding: 0 10 0 5px;
+}
+
+#mode{
+  padding: 5px;
+  font-weight: bold;
+  border-radius: 5px;
+  background-color: @accent;
+}
+
+#pulseaudio,
+#clock,
+#cpu,
+#battery,
+#backlight,
+#memory,
+#language,
+#temperature,
+#network,
+#idle_inhibitor {
+  color: @foreground;
+  background: @background;
+  padding: 0 0 0 5px;
+}

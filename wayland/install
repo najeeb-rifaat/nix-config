@@ -1,0 +1,46 @@
+install_packages()
+{
+	pacman -Sy --needed - < packages
+}
+
+configure_sway()
+{
+	mkdir -p $HOME/.config/sway
+	ln -sf $PWD/sway/config $HOME/.config/sway/config
+}
+
+configure_waybar()
+{
+	mkdir -p $HOME/.config/waybar
+	ln -sf $PWD/waybar/config $HOME/.config/waybar/config
+	ln -sf $PWD/waybar/style.css $HOME/.config/waybar/style.css
+}
+
+configure_wofi()
+{
+	mkdir -p $HOME/.config/wofi
+	ln -sf $PWD/wofi/style.css $HOME/.config/wofi/style.css
+}
+
+configure_alacritty()
+{
+	mkdir -p $HOME/.config/alacritty
+	ln -sf $PWD/alacritty/alacritty.yml $HOME/.config/alacritty/alacritty.yml
+}
+
+op=$1
+case $op in
+"pkg")
+	install_packages
+	;;
+"cfg")
+	configure_sway
+	configure_waybar
+	configure_wofi
+	configure_alacritty
+	;;
+*)
+	echo "Select either 'pkg' to install packages or 'cfg' to link config"
+	;;
+esac
+
