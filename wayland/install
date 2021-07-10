@@ -1,6 +1,10 @@
-install_packages()
+install_main_packages()
 {
   sudo pacman -S --needed - < packages
+}
+
+install_aur_packages()
+{
   yay -S --needed - < packages_aur
 }
 
@@ -32,7 +36,10 @@ configure_alacritty()
 op=$1
 case $op in
 "pkg")
-install_packages
+install_main_packages
+;;
+"aur")
+install_aur_packages
 ;;
 "cfg")
 configure_sway

@@ -37,3 +37,9 @@ seahorse
 gnome-keyring
 pinentry
 arc-gtk-theme
+mpv
+gstreamer
+gst-plugin-gtk
+gst-plugins-good
+gst-plugins-bad
+gst-plugins-ugly
