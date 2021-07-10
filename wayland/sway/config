@@ -95,7 +95,7 @@ input "type:keyboard" {
     xkb_options grp:win_space_toggle
 }
 
-input "1739:52620:SYNA8005:00_06CB:CD8C_Touchpad" {
+input "type:touchpad" {
     dwt enabled
     tap enabled
     natural_scroll enabled
