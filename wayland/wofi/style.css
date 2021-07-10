@@ -1,0 +1,55 @@
+@define-color background #292b2e;
+@define-color foreground #ffffdd;
+@define-color accent aqua;
+
+window {
+    opacity: 0.95;
+    border:  0px;
+    border-radius: 10px;
+    font-size: 22px;
+    font-family: "SF Mono", monospace;
+}
+
+#input {
+  border-radius: 10px 10px 0px 0px;
+  border:  0px;
+  padding: 10px;
+  margin: 0px;
+  font-size: 28px;
+  color: #8EC07C;
+  background-color: #554444;
+  text-decoration: underline;
+}
+
+#inner-box {
+  margin: 0px;
+  color: @accent;
+  background-color: @background;
+}
+
+#outer-box {
+  margin: 0px;
+  background-color: @background;
+  border-radius: 10px;
+}
+
+#selected {
+  background-color: #608787;
+  text-shadow: 1px;
+}
+
+#entry {
+  padding: 0px;
+  margin: 0px;
+  background-color: @background;
+}
+
+#scroll {
+  margin: 5px;
+  background-color: @background;
+}
+
+#text {
+  margin: 0px;
+  padding: 2px 2px 2px 10px;
+}
