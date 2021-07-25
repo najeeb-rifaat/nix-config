@@ -87,7 +87,9 @@ smart_gaps no_gaps
 #
 # You can get the names of your inputs by running: swaymsg -t get_inputs
 # Read `man 5 sway-input` for more information about this section.
-#
+
+
+# Keyboards
 input "type:keyboard" {
     repeat_delay 350
     repeat_rate 50
@@ -95,6 +97,8 @@ input "type:keyboard" {
     xkb_options grp:win_space_toggle
 }
 
+# Trackpads
+## Built-in touchpad on TrustyCompanion
 input "1739:52620:SYNA8005:00_06CB:CD8C_Touchpad" {
     dwt enabled
     tap enabled
@@ -102,7 +106,16 @@ input "1739:52620:SYNA8005:00_06CB:CD8C_Touchpad" {
     middle_emulation enabled
     scroll_factor 0.35
 }
+## MagicTrackpad on WhiteKnight
+input "76:613:Apple_Inc._Magic_Trackpad_2" {
+    dwt enabled
+    tap enabled
+    natural_scroll enabled
+    middle_emulation enabled
+    scroll_factor 0.40
+}
 
+# Mice
 input "76:617:Mohammed_Najeeb_Rifaat___s_Mouse" {
     natural_scroll enabled
     middle_emulation disabled
