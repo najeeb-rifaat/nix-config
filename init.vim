@@ -1,0 +1,157 @@
+" """"""""""""""""""""""""""""""""""""""""""""""
+" MINIMAL SETUP (https://www.guckes.net/vim/setup.html)
+" """"""""""""""""""""""""""""""""""""""""""""""
+set hidden
+set showcmd
+set visualbell
+set noerrorbells
+set nostartofline
+set laststatus=2
+set viminfo=%,'50,\"100,:100,n~/.neoviminfo
+
+""""""""""""""""""""""""""""""""""""""""""""""
+" Plugin Setting
+" """"""""""""""""""""""""""""""""""""""""""""""
+call plug#begin()
+
+" Start page
+Plug 'mhinz/vim-startify'
+
+" Status line
+Plug 'itchyny/lightline.vim'
+
+" ColorSchemes
+Plug 'flazz/vim-colorschemes'
+
+" Stntax highlight
+Plug 'sheerun/vim-polyglot'
+
+" Indentation Line
+Plug 'Yggdroot/indentLine'
+
+" Editor config
+Plug 'editorconfig/editorconfig-vim'
+
+" SCM
+Plug 'tpope/vim-fugitive'
+Plug 'airblade/vim-gitgutter'
+
+" Fuzzy finder
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
+
+" LSP package
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+
+call plug#end()
+
+
+
+""""""""""""""""""""""""""""""""""""""""""""""
+" General Setting
+" """"""""""""""""""""""""""""""""""""""""""""""
+" Set color scheme (265bit)
+colorscheme wombat256i
+
+" Set color space (265bit)
+if !has('gui_running')
+  set t_Co=256
+endif
+
+" Enable italic fonts
+let g:vem_colors_italic = 1
+
+" Reduce re-renders
+set lazyredraw
+set ttyfast
+
+" Set Default encoding
+set encoding=utf8
+
+" Set language for spelling
+set spell spelllang=en
+
+" Enable syntax highlight
+syntax on
+
+" Enable Nerd Fonts (Patched)
+set guifont=SFMono\ Nerd\ Font:h16
+
+" Enable Line number (Hybrid)
+set number relativenumber
+
+" When searching try to be smart about cases
+set smartcase
+
+" Set columns ruler
+set ruler
+set colorcolumn=81,99
+
+" Set cursor line highlight
+set cursorline
+set cursorcolumn
+
+" Use system clipboard
+set clipboard=unnamedplus
+
+" Set leading and trailing line chars
+set nowrap
+set sidescroll=10
+set list listchars=tab:>-,trail:.,precedes:<,extends:+
+
+" Indent line Setting
+let g:indentLine_char_list = ['|', '¦', '┆', '┊']
+set autoindent
+
+" Set Spelling mistake highlights
+highlight clear SpellBad
+highlight SpellBad cterm=italic,underline
+highlight SpellCap ctermbg=none cterm=bold,underline
+
+" Highlight search match highlights
+set hlsearch
+highlight Search ctermbg=Grey ctermfg=black cterm=bold,underline
+
+
+
+""""""""""""""""""""""""""""""""""""""""""""""
+" Key Mapping Setting
+" """"""""""""""""""""""""""""""""""""""""""""""
+" Disable arrow keys
+map <up> <nop>
+map <down> <nop>
+map <left> <nop>
+map <right> <nop>
+
+" Set <Leader> key
+let mapleader="\\"
+
+" Remove useless spaces
+nmap <leader><space> :%s/\s\+$//<CR>
+
+" Openup git fugetive
+nmap <leader>g :Git<CR>
+
+" Openup explorer
+nmap <leader>e :Explore<CR>
+
+" Map terminal mode switch
+tnoremap <Esc> <C-\><C-n>
+
+" Search - Setting
+nmap <C-p> :Files<CR>
+nmap <C-o> :Buffers<CR>
+nmap <C-s> :Ag<CR>
+
+" FZF Key Mapping
+let g:fzf_action = {
+    \ 'ctrl-h': 'split',
+    \ 'ctrl-v': 'vsplit'
+  \ }
+
+" Buffer Control mapping
+map <Leader>w :w<CR>
+map <Leader>Q :q!<CR>
+
+" Tab navigation mapping
+map <Leader>t :tabnew<CR>

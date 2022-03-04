@@ -41,6 +41,7 @@ exec swayidle -w \
 # Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
 output * bg $HOME/Pictures/system/wallpaper.jpg fill
 output eDP-1 resolution 1920x1080
+output DP-1 resolution 1920x1080
 seat * hide_cursor when-typing enable
 
 ### Font configuration
