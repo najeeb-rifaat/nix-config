@@ -3,6 +3,7 @@
 " """"""""""""""""""""""""""""""""""""""""""""""
 set hidden
 set showcmd
+set autochdir
 set visualbell
 set noerrorbells
 set nostartofline
@@ -103,6 +104,22 @@ set list listchars=tab:>-,trail:.,precedes:<,extends:+
 let g:indentLine_char_list = ['|', '¦', '┆', '┊']
 set autoindent
 
+" Netrw absolute width of netrw window
+let g:netrw_winsize = -28
+
+"  Netrw do not display info on the top of window
+let g:netrw_banner = 0
+let g:netrw_altv = 1
+
+" Netrw tree-view
+let g:netrw_liststyle = 3
+
+" Netrw sort is affecting only: directories on the top, files below
+let g:netrw_sort_sequence = '[\/]$,*'
+
+" Netrw use the previous window to open file
+let g:netrw_browse_split = 4
+
 " Set Spelling mistake highlights
 highlight clear SpellBad
 highlight SpellBad cterm=italic,underline
@@ -133,7 +150,7 @@ nmap <leader><space> :%s/\s\+$//<CR>
 nmap <leader>g :Git<CR>
 
 " Openup explorer
-nmap <leader>e :Explore<CR>
+nmap <leader>e :Lexplore<CR>
 
 " Map terminal mode switch
 tnoremap <Esc> <C-\><C-n>
@@ -155,3 +172,5 @@ map <Leader>Q :q!<CR>
 
 " Tab navigation mapping
 map <Leader>t :tabnew<CR>
+map <Leader>] :tabnext<CR>
+map <Leader>[ :tabprev<CR>
