@@ -1,14 +1,20 @@
 " """"""""""""""""""""""""""""""""""""""""""""""
 " MINIMAL SETUP (https://www.guckes.net/vim/setup.html)
 " """"""""""""""""""""""""""""""""""""""""""""""
+set nocompatible
 set hidden
 set showcmd
+set nobackup
 set autochdir
 set visualbell
 set noerrorbells
 set nostartofline
+set nowritebackup
+set shortmess+=c
 set laststatus=2
+set updatetime=500
 set viminfo=%,'50,\"100,:100,n~/.neoviminfo
+set tabstop=2 softtabstop=0 expandtab shiftwidth=2 smarttab
 
 """"""""""""""""""""""""""""""""""""""""""""""
 " Plugin Setting
@@ -17,6 +23,9 @@ call plug#begin()
 
 " Start page
 Plug 'mhinz/vim-startify'
+
+" DevIcons
+Plug 'ryanoasis/vim-devicons'
 
 " Status line
 Plug 'itchyny/lightline.vim'
@@ -40,6 +49,10 @@ Plug 'airblade/vim-gitgutter'
 " Fuzzy finder
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
+
+" File Manager
+Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
+Plug 'low-ghost/nerdtree-fugitive', { 'on':  'NERDTreeToggle' }
 
 " LSP package
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -129,6 +142,12 @@ highlight SpellCap ctermbg=none cterm=bold,underline
 set hlsearch
 highlight Search ctermbg=Grey ctermfg=black cterm=bold,underline
 
+" Set git Diff highlights
+highlight DiffChange ctermbg=Green ctermfg=none
+highlight DiffAdd ctermbg=LightBlue ctermfg=Black
+highlight DiffText ctermbg=LightBlue ctermfg=Black cterm=underline
+highlight DiffDelete ctermbg=Yellow ctermfg=Black cterm=strikethrough
+
 
 
 """"""""""""""""""""""""""""""""""""""""""""""
@@ -150,7 +169,10 @@ nmap <leader><space> :%s/\s\+$//<CR>
 nmap <leader>g :Git<CR>
 
 " Openup explorer
-nmap <leader>e :Lexplore<CR>
+map <Leader>e :NERDTreeToggle<CR>
+
+" Openup terminal
+map <Leader>T :terminal<CR>
 
 " Map terminal mode switch
 tnoremap <Esc> <C-\><C-n>
