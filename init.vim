@@ -148,6 +148,8 @@ highlight DiffAdd ctermbg=LightBlue ctermfg=Black
 highlight DiffText ctermbg=LightBlue ctermfg=Black cterm=underline
 highlight DiffDelete ctermbg=Yellow ctermfg=Black cterm=strikethrough
 
+" Show hidden files in explorer window
+let NERDTreeShowHidden=1
 
 
 """"""""""""""""""""""""""""""""""""""""""""""
@@ -196,3 +198,14 @@ map <Leader>Q :q!<CR>
 map <Leader>t :tabnew<CR>
 map <Leader>] :tabnext<CR>
 map <Leader>[ :tabprev<CR>
+
+" CoC mapping
+nmap <silent> <Leader>g <Plug>(coc-diagnostic-prev)
+
+" GoTo code navigation.
+nmap <silent> <Leader>d <Plug>(coc-definition)
+nmap <silent> <Leader>y <Plug>(coc-type-definition)
+nmap <silent> <Leader>i <Plug>(coc-implementation)
+nmap <silent> <Leader>r <Plug>(coc-references)
+nmap <silent> <Leader>. <Plug>(coc-codeaction)
+nmap <leader>rn <Plug>(coc-rename)
