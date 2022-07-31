@@ -6,6 +6,8 @@ set hidden
 set showcmd
 set nobackup
 set autochdir
+set smartcase
+set ignorecase
 set visualbell
 set noerrorbells
 set nostartofline

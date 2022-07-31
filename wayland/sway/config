@@ -3,6 +3,11 @@
 # Copy this to ~/.config/sway/config and edit it to your liking.
 #
 # Read `man 5 sway` for a complete reference.
+set $cl_high #009ddc
+set $cl_indi #d9d8d8
+set $cl_back #231f20
+set $cl_fore #d9d8d8
+set $cl_urge #ee2e24
 
 ### Variables
 #
@@ -42,8 +47,7 @@ exec swayidle -w \
 # Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
 output * bg $HOME/Pictures/system/wallpaper.jpg fill
 output eDP-1 resolution 1920x1080
-output DP-1 resolution 1920x1080
-seat * hide_cursor when-typing enable
+output DP-2 adaptive_sync off render_bit_depth 10
 
 ### Font configuration
 #
@@ -51,11 +55,21 @@ font pango:SF Mono 14
 
 
 ### Border configuration
-#
-default_border pixel 2
-smart_borders no_gaps
-smart_gaps no_gaps
+# Colors                border   bg       text     indi     childborder
+client.focused          $cl_high $cl_high $cl_fore $cl_indi $cl_high
+client.focused_inactive $cl_back $cl_back $cl_fore $cl_back $cl_back
+client.unfocused        $cl_back $cl_back $cl_fore $cl_back $cl_back
+client.urgent           $cl_urge $cl_urge $cl_fore $cl_urge $cl_urge
 
+# Window borders
+smart_gaps on
+gaps inner 28
+gaps outer -8
+default_border pixel 4
+default_floating_border pixel 2
+hide_edge_borders smart
+
+#
 #
 # Example configuration:
 #
@@ -234,6 +248,7 @@ input "76:617:Mohammed_Najeeb_Rifaat___s_Mouse" {
 
     # Move focus to the parent container
     bindsym $mod+a focus parent
+    bindsym $mod+shift+a focus child
 
     # Enable sicky
     bindsym $mod+Shift+s sticky toggle
@@ -284,6 +299,9 @@ bindsym XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle
 bindsym XF86AudioMicMute exec pactl set-source-mute @DEFAULT_SOURCE@ toggle
 bindsym XF86MonBrightnessDown exec brightnessctl set 5%-
 bindsym XF86MonBrightnessUp exec brightnessctl set +5%
+bindsym XF86AudioPlay exec playerctl play-pause -a
+bindsym XF86AudioNext exec playerctl next -a
+bindsym XF86AudioPrev exec playerctl previous -a
 
 bindsym $mod+shift+v exec clipman pick --tool wofi -T'-G -i --prompt=\"Clipboard\"'
 
@@ -294,5 +312,18 @@ bindsym $mod+shift+v exec clipman pick --tool wofi -T'-G -i --prompt=\"Clipboard
 bar {
   swaybar_command waybar
 }
+
+for_window [title="CPod"] floating enable, move position center
+for_window [app_id="io.gitlab.caveman250.headlines"] floating enable, border pixel 0, move position center
+for_window [app_id="mpv"] floating enable, border pixel 0, move position center
+for_window [window_role = "pop-up"] floating enable
+for_window [window_role = "bubble"] floating enable
+for_window [window_role = "dialog"] floating enable
+for_window [window_type = "dialog"] floating enable
+for_window [app_id="firefox" title="Firefox – Sharing Indicator"] floating enable
+for_window [app_id="firefox" title="Pushbullet – Mozilla Firefox"] floating enable
+for_window [app_id="firefox" title="About Mozilla Firefox"] floating enable
+for_window [app_id="firefox" title="Picture-in-Picture"] floating enable, move position center
+for_window [title="Picture in picture"] floating enable, move position center
 
 include /etc/sway/config.d/*
