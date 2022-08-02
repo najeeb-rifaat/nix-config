@@ -27,8 +27,8 @@
     "idle_inhibitor": {
         "format": "{icon}",
         "format-icons": {
-            "activated": "",
-            "deactivated": ""
+            "activated": " ",
+            "deactivated": " "
         }
     },
     "tray": {
@@ -62,7 +62,7 @@
     },
     "sway/language": {
         "format": "{shortDescription}"
-   },
+    },
     "battery": {
         "states": {
             "good": 95,
@@ -71,7 +71,7 @@
         },
         "format": "{icon}",
         "format-charging": "{capacity}% ",
-        "format-plugged": "{capacity}% ",
+        "format-plugged": " ",
         "format-alt": "{capacity}% {icon}",
         "format-icons": ["", "", "", "", ""]
     },
