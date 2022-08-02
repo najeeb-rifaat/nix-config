@@ -328,5 +328,6 @@ for_window [app_id="firefox" title="Picture-in-Picture"] floating enable, move p
 for_window [title="Picture in picture"] floating enable, move position center
 
 assign [title="Mailspring"] workspace 10
+assign [app_id="NewsFlashGTK"] workspace 9
 
 include /etc/sway/config.d/*
