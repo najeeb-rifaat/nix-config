@@ -11,6 +11,10 @@ window#waybar {
   background: @background;
 }
 
+#workspaces {
+  padding: 0 5 0 0px;
+}
+
 #workspaces button.focused {
   color: @foreground;
   border-radius: 5px;
