@@ -3,11 +3,12 @@
 # Copy this to ~/.config/sway/config and edit it to your liking.
 #
 # Read `man 5 sway` for a complete reference.
-set $cl_high #009ddc
+#set $cl_high #009ddc
+set $cl_high #A7A1A1
 set $cl_indi #d9d8d8
 set $cl_back #231f20
-set $cl_fore #d9d8d8
-set $cl_urge #ee2e24
+set $cl_fore #ffffff
+set $cl_urge #c85d57
 
 ### Variables
 #
@@ -65,8 +66,8 @@ client.urgent           $cl_urge $cl_urge $cl_fore $cl_urge $cl_urge
 smart_gaps on
 gaps inner 28
 gaps outer -8
-default_border pixel 4
-default_floating_border pixel 2
+default_border pixel 3
+default_floating_border pixel 1
 hide_edge_borders smart
 
 #

@@ -25,6 +25,7 @@ window#waybar {
 }
 
 #mode{
+  color: black;
   padding: 5px;
   font-weight: bold;
   border-radius: 5px;
