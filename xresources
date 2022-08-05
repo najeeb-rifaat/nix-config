@@ -1,4 +1,4 @@
-*.font: SF Mono:style=Regular:size=24
+*.font: Hack Nerd Font:style=Regular:size=22
 *.termname: st-256color
 *.xfps: 60
 *.actionfps: 30

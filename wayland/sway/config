@@ -52,7 +52,8 @@ output DP-2 adaptive_sync off render_bit_depth 10
 
 ### Font configuration
 #
-font pango:SF Mono 14
+#font pango:"Hack Nerd Font" Regular 16
+font pango:"RobotoMono Nerd Font Mono" Regular 16
 
 
 ### Border configuration
@@ -314,18 +315,19 @@ bar {
   swaybar_command waybar
 }
 
-for_window [title="CPod"] floating enable, move position center
-for_window [app_id="io.gitlab.caveman250.headlines"] floating enable, border pixel 0, move position center
-for_window [app_id="mpv"] floating enable, border pixel 0, move position center
+for_window [title="CPod"] floating enable, move position center, border pixel 0
+for_window [app_id="mpv"] floating enable, move position center, borders pixel 0
+for_window [title="Cider"] floating enable, move position center, border pixel 0
+for_window [app_id="io.gitlab.caveman250.headlines"] floating enable, move position center, border pixel 0
+for_window [app_id="firefox" title="Picture-in-Picture"] floating enable, move position center, borders pixel 0
+for_window [title="Picture in picture"] floating enable, move position center, move position center, borders pixel 0
 for_window [window_role = "pop-up"] floating enable
 for_window [window_role = "bubble"] floating enable
 for_window [window_role = "dialog"] floating enable
 for_window [window_type = "dialog"] floating enable
+for_window [app_id="firefox" title="About Mozilla Firefox"] floating enable
 for_window [app_id="firefox" title="Firefox – Sharing Indicator"] floating enable
 for_window [app_id="firefox" title="Pushbullet – Mozilla Firefox"] floating enable
-for_window [app_id="firefox" title="About Mozilla Firefox"] floating enable
-for_window [app_id="firefox" title="Picture-in-Picture"] floating enable, move position center
-for_window [title="Picture in picture"] floating enable, move position center
 
 assign [title="Mailspring"] workspace 10
 assign [app_id="NewsFlashGTK"] workspace 9

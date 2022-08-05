@@ -57,8 +57,8 @@
     },
     "backlight": {
         // "device": "acpi_video1",
-        "format": "{percent}% {icon}",
-        "format-icons": ["","I", "II", ""]
+        "format": "{icon}",
+        "format-icons": [" I"," II", " III", " IIII"]
     },
     "sway/language": {
         "format": "{shortDescription}"
@@ -69,10 +69,11 @@
             "warning": 30,
             "critical": 15
         },
-        "format": "{icon}",
+        "rotate": 90,
+        "format": "{icon} ",
         "format-charging": "{capacity}% ",
-        "format-plugged": " ",
-        "format-alt": "{capacity}% {icon}",
+        "format-plugged": "",
+        "format-alt": "{capacity}",
         "format-icons": ["", "", "", "", ""]
     },
     "network": {
