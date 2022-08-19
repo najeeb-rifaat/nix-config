@@ -315,9 +315,10 @@ bar {
   swaybar_command waybar
 }
 
-for_window [title="CPod"] floating enable, move position center, border pixel 0
+for_window [class="CPod"] floating enable, move position center, border pixel 0
 for_window [app_id="mpv"] floating enable, move position center, borders pixel 0
-for_window [title="Cider"] floating enable, move position center, border pixel 0
+for_window [class="Cider"] floating enable, move position center, border pixel 0
+for_window [title="Android Emulator"] floating enable, move position center, border pixel 0
 for_window [app_id="io.gitlab.caveman250.headlines"] floating enable, move position center, border pixel 0
 for_window [app_id="firefox" title="Picture-in-Picture"] floating enable, move position center, borders pixel 0
 for_window [title="Picture in picture"] floating enable, move position center, move position center, borders pixel 0
