@@ -348,3 +348,5 @@ assign [app_id="NewsFlashGTK"] workspace 9
 include /etc/sway/config.d/*
 
 exec_always import-gsettings
+exec xss-lock -- swaylock -n  -i $HOME/Pictures/system/wallpaper.jpg
+exec systemctl --user import-environment
