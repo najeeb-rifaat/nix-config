@@ -47,8 +47,6 @@ exec swayidle -w \
 #
 # Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
 output * bg $HOME/Pictures/system/wallpaper.jpg fill
-output eDP-1 resolution 1920x1080
-output DP-2 adaptive_sync off render_bit_depth 10
 
 ### Font configuration
 #
@@ -211,7 +209,7 @@ input "76:617:Mohammed_Najeeb_Rifaat___s_Mouse" {
     bindsym $mod+7 workspace number 7
     bindsym $mod+8 workspace number 8
     bindsym $mod+9 workspace number 9
-    bindsym $mod+0 workspace number 10 Mail
+    bindsym $mod+0 workspace number 10
     # Move focused container to workspace
     bindsym $mod+Shift+1 move container to workspace number 1
     bindsym $mod+Shift+2 move container to workspace number 2
@@ -301,11 +299,24 @@ bindsym XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle
 bindsym XF86AudioMicMute exec pactl set-source-mute @DEFAULT_SOURCE@ toggle
 bindsym XF86MonBrightnessDown exec brightnessctl set 5%-
 bindsym XF86MonBrightnessUp exec brightnessctl set +5%
-bindsym XF86AudioPlay exec playerctl play-pause -a
-bindsym XF86AudioNext exec playerctl next -a
-bindsym XF86AudioPrev exec playerctl previous -a
+bindsym XF86AudioPlay exec playerctl play-pause
+bindsym XF86AudioNext exec playerctl next
+bindsym XF86AudioPrev exec playerctl previous
 
 bindsym $mod+shift+v exec clipman pick --tool wofi -T'-G -i --prompt=\"Clipboard\"'
+
+
+# Allow switching between workspaces with left and right swipes
+bindgesture swipe:4:right workspace prev
+bindgesture swipe:4:left workspace next
+bindgesture swipe:4:up workspace 1
+bindgesture swipe:4:down workspace 10
+
+# Allow container movements by pinching them
+bindgesture pinch:inward+up move up
+bindgesture pinch:inward+down move down
+bindgesture pinch:inward+left move left
+bindgesture pinch:inward+right move right
 
 #
 # Status Bar:
@@ -315,7 +326,8 @@ bar {
   swaybar_command waybar
 }
 
-for_window [class="CPod"] floating enable, move position center, border pixel 0
+for_window [title="File Operation Progress"] floating enable, move position center, border pixel 0
+for_window [title="CPod"] floating enable, move position center, border pixel 0
 for_window [app_id="mpv"] floating enable, move position center, borders pixel 0
 for_window [class="Cider"] floating enable, move position center, border pixel 0
 for_window [title="Android Emulator"] floating enable, move position center, border pixel 0
@@ -334,3 +346,5 @@ assign [title="Mailspring"] workspace 10
 assign [app_id="NewsFlashGTK"] workspace 9
 
 include /etc/sway/config.d/*
+
+exec_always import-gsettings
