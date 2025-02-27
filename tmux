@@ -120,7 +120,8 @@ setw -g window-status-current-style fg=yellow
 setw -g window-status-current-style bg=blue
 setw -g window-status-current-format ' <#I:#W> '
 
-setw -g status-left "#[fg=white,bg=black]#(tmux-mem-cpu-load -t 1 -m 1 -a 0 -g 0 -i 1)"
+#setw -g status-left "#[fg=white,bg=black]#(tmux-mem-cpu-load -m 1 -a 0 -g 0 -i 3 -p -v -g)"
+setw -g status-left "#[fg=white,bg=black]#(tmux-mem-cpu-load -p -v -a 0)"
 setw -g status-left-length 50
 
 setw -g status-right "#[fg=white,bg=black]#H"

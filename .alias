@@ -21,3 +21,6 @@ alias yolo='sudo'
 #### Bluetooth ####
 alias bt-on='echo -e "power on\n" | bluetoothctl'
 alias bt-off='echo -e "power off\n" | bluetoothctl'
+
+#### Docker ####
+alias docker=podman

@@ -7,7 +7,6 @@ set showcmd
 set nobackup
 set autochdir
 set smartcase
-set ignorecase
 set visualbell
 set noerrorbells
 set nostartofline
@@ -17,6 +16,7 @@ set laststatus=2
 set updatetime=500
 set viminfo=%,'50,\"100,:100,n~/.neoviminfo
 set tabstop=2 softtabstop=0 expandtab shiftwidth=2 smarttab
+set ignorecase
 
 """"""""""""""""""""""""""""""""""""""""""""""
 " Plugin Setting
@@ -30,7 +30,9 @@ Plug 'mhinz/vim-startify'
 Plug 'ryanoasis/vim-devicons'
 
 " Status line
-Plug 'itchyny/lightline.vim'
+"Plug 'itchyny/lightline.vim'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 
 " ColorSchemes
 Plug 'flazz/vim-colorschemes'
@@ -56,18 +58,31 @@ Plug 'junegunn/fzf.vim'
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 Plug 'low-ghost/nerdtree-fugitive', { 'on':  'NERDTreeToggle' }
 
-" LSP package
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
+" Sideline
+Plug 'preservim/tagbar'
+
+" LSP Package
+Plug 'williamboman/mason.nvim'
+Plug 'neovim/nvim-lspconfig'
+Plug 'williamboman/mason-lspconfig.nvim'
+Plug 'hrsh7th/cmp-nvim-lsp'
+Plug 'hrsh7th/cmp-buffer'
+Plug 'hrsh7th/cmp-path'
+Plug 'hrsh7th/cmp-cmdline'
+Plug 'hrsh7th/nvim-cmp'
+Plug 'hrsh7th/cmp-vsnip'
+Plug 'hrsh7th/vim-vsnip'
+Plug 'nvim-lua/plenary.nvim'
+Plug 'petertriho/cmp-git'
 
 call plug#end()
-
-
 
 """"""""""""""""""""""""""""""""""""""""""""""
 " General Setting
 " """"""""""""""""""""""""""""""""""""""""""""""
 " Set color scheme (265bit)
 colorscheme wombat256i
+set termguicolors
 
 " Set color space (265bit)
 if !has('gui_running')
@@ -95,6 +110,7 @@ set guifont=SFMono\ Nerd\ Font:h16
 
 " Enable Line number (Hybrid)
 set number relativenumber
+set scrolloff=999
 
 " When searching try to be smart about cases
 set smartcase
@@ -115,9 +131,14 @@ set nowrap
 set sidescroll=10
 set list listchars=tab:>-,trail:.,precedes:<,extends:+
 
+" Splits
+set splitbelow
+set splitright
+
 " Indent line Setting
 let g:indentLine_char_list = ['|', '¦', '┆', '┊']
 set autoindent
+set virtualedit=block
 
 " Netrw absolute width of netrw window
 let g:netrw_winsize = -28
@@ -211,3 +232,117 @@ nmap <silent> <Leader>i <Plug>(coc-implementation)
 nmap <silent> <Leader>r <Plug>(coc-references)
 nmap <silent> <Leader>. <Plug>(coc-codeaction)
 nmap <leader>rn <Plug>(coc-rename)
+
+" LUA setup
+lua << EOF
+require("mason").setup()
+require("mason-lspconfig").setup({
+    ensure_installed = { "lua_ls", "pyright", "ast_grep", "bashls", "eslint", "ts_ls", "omnisharp", "jdtls" }, -- Add LSPs you need
+    automatic_installation = true,
+})
+
+require("mason-lspconfig").setup_handlers {
+    -- The first entry (without a key) will be the default handler
+    -- and will be called for each installed server that doesn't have
+    -- a dedicated handler.
+    function (server_name) -- default handler (optional)
+        require("lspconfig")[server_name].setup {}
+    end,
+    -- Next, you can provide a dedicated handler for specific servers.
+    -- For example, a handler override for the `rust_analyzer`:
+    --["rust_analyzer"] = function ()
+    --    require("rust-tools").setup {}
+    --end
+}
+EOF
+
+lua <<EOF
+  -- Set up nvim-cmp.
+  local cmp = require'cmp'
+
+  cmp.setup({
+    snippet = {
+      -- REQUIRED - you must specify a snippet engine
+      expand = function(args)
+        vim.fn["vsnip#anonymous"](args.body) -- For `vsnip` users.
+        -- require('luasnip').lsp_expand(args.body) -- For `luasnip` users.
+        -- require('snippy').expand_snippet(args.body) -- For `snippy` users.
+        -- vim.fn["UltiSnips#Anon"](args.body) -- For `ultisnips` users.
+        -- vim.snippet.expand(args.body) -- For native neovim snippets (Neovim v0.10+)
+
+        -- For `mini.snippets` users:
+        -- local insert = MiniSnippets.config.expand.insert or MiniSnippets.default_insert
+        -- insert({ body = args.body }) -- Insert at cursor
+        -- cmp.resubscribe({ "TextChangedI", "TextChangedP" })
+        -- require("cmp.config").set_onetime({ sources = {} })
+      end,
+    },
+    window = {
+      completion = cmp.config.window.bordered(),
+      documentation = cmp.config.window.bordered(),
+    },
+    mapping = cmp.mapping.preset.insert({
+      ['<C-b>'] = cmp.mapping.scroll_docs(-4),
+      ['<C-f>'] = cmp.mapping.scroll_docs(4),
+      ['<C-Space>'] = cmp.mapping.complete(),
+      ['<C-e>'] = cmp.mapping.abort(),
+      ['<CR>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+    }),
+    sources = cmp.config.sources({
+      { name = 'nvim_lsp' },
+      { name = 'vsnip' }, -- For vsnip users.
+    }, {
+      { name = 'buffer' },
+    })
+  })
+
+  -- To use git you need to install the plugin petertriho/cmp-git and uncomment lines below
+  -- Set configuration for specific filetype.
+  cmp.setup.filetype('gitcommit', {
+    sources = cmp.config.sources({
+      { name = 'git' },
+    }, {
+      { name = 'buffer' },
+    })
+ })
+ require("cmp_git").setup()
+
+  -- Use buffer source for `/` and `?` (if you enabled `native_menu`, this won't work anymore).
+  cmp.setup.cmdline({ '/', '?' }, {
+    mapping = cmp.mapping.preset.cmdline(),
+    sources = {
+      { name = 'buffer' }
+    }
+  })
+
+  -- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
+  cmp.setup.cmdline(':', {
+    mapping = cmp.mapping.preset.cmdline(),
+    sources = cmp.config.sources({
+      { name = 'path' }
+    }, {
+      { name = 'cmdline' }
+    }),
+    matching = { disallow_symbol_nonprefix_matching = false }
+  })
+
+  -- Set up lspconfig.
+  local capabilities = require('cmp_nvim_lsp').default_capabilities()
+  -- Replace <YOUR_LSP_SERVER> with each lsp server you've enabled.
+  --require('lspconfig').setup {
+  --  capabilities = capabilities
+  --}
+EOF
+
+
+"local lspconfig = require("lspconfig")
+"-- Setup for Lua Language Server
+"lspconfig.lua_ls.setup({})
+"-- Setup for TypeScript Server
+"lspconfig.ts_ls.setup({})
+"-- Setup for Python
+"lspconfig.pyright.setup({})
+"-- Setup for JAVA
+"lspconfig.jdtls.setup({})
+
+
