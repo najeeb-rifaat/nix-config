@@ -1,4 +1,4 @@
-" """"""""""""""""""""""""""""""""""""""""""""""
+": """"""""""""""""""""""""""""""""""""""""""""""
 " MINIMAL SETUP (https://www.guckes.net/vim/setup.html)
 " """"""""""""""""""""""""""""""""""""""""""""""
 set nocompatible
@@ -60,6 +60,9 @@ Plug 'low-ghost/nerdtree-fugitive', { 'on':  'NERDTreeToggle' }
 
 " Sideline
 Plug 'preservim/tagbar'
+
+" TreeSitter
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 
 " LSP Package
 Plug 'williamboman/mason.nvim'
@@ -226,7 +229,7 @@ map <Leader>[ :tabprev<CR>
 nmap <silent> <Leader>g <Plug>(coc-diagnostic-prev)
 
 " GoTo code navigation.
-nmap <silent> <Leader>d <Plug>(coc-definition)
+nmap <silent> <Leader>d <Plug>(oc-definition)
 nmap <silent> <Leader>y <Plug>(coc-type-definition)
 nmap <silent> <Leader>i <Plug>(coc-implementation)
 nmap <silent> <Leader>r <Plug>(coc-references)
@@ -237,7 +240,7 @@ nmap <leader>rn <Plug>(coc-rename)
 lua << EOF
 require("mason").setup()
 require("mason-lspconfig").setup({
-    ensure_installed = { "lua_ls", "pyright", "ast_grep", "bashls", "eslint", "ts_ls", "omnisharp", "jdtls" }, -- Add LSPs you need
+    ensure_installed = { "lua_ls", "pyright", "ast_grep", "bashls", "omnisharp", "jdtls", "ts_ls","svelte" }, -- Add LSPs you need
     automatic_installation = true,
 })
 
@@ -335,14 +338,35 @@ lua <<EOF
 EOF
 
 
-"local lspconfig = require("lspconfig")
-"-- Setup for Lua Language Server
-"lspconfig.lua_ls.setup({})
-"-- Setup for TypeScript Server
-"lspconfig.ts_ls.setup({})
-"-- Setup for Python
-"lspconfig.pyright.setup({})
-"-- Setup for JAVA
-"lspconfig.jdtls.setup({})
+lua <<EOF
+  require'nvim-treesitter.configs'.setup {
+    ensure_installed = "all", -- Install all parsers
+    highlight = {
+      enable = true, -- Enables syntax highlighting
+      additional_vim_regex_highlighting = false,
+    },
+    indent = {
+      enable = true, -- Enables automatic indentation
+    },
+  }
 
+  vim.diagnostic.config({
+    virtual_text = false,  -- Disable virtual text (so it doesn’t cut off)
+    float = {
+      source = "always",    -- Show source of diagnostic
+      border = "rounded",   -- Make it look better
+      wrap = true,          -- Enable line wrapping
+    },
+    underline = true,       -- Underline problematic code
+    signs = true,           -- Show signs in the sign column
+    update_in_insert = false, -- Don't update while typing
+  })
 
+  vim.api.nvim_create_autocmd("CursorHold", {
+    pattern = "*",
+    callback = function()
+      vim.diagnostic.open_float(nil, { focus = false, scope = "cursor" })
+    end,
+  })
+
+EOF
