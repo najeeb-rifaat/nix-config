@@ -225,16 +225,11 @@ map <Leader>t :tabnew<CR>
 map <Leader>] :tabnext<CR>
 map <Leader>[ :tabprev<CR>
 
-" CoC mapping
-nmap <silent> <Leader>g <Plug>(coc-diagnostic-prev)
-
-" GoTo code navigation.
-nmap <silent> <Leader>d <Plug>(oc-definition)
-nmap <silent> <Leader>y <Plug>(coc-type-definition)
-nmap <silent> <Leader>i <Plug>(coc-implementation)
-nmap <silent> <Leader>r <Plug>(coc-references)
-nmap <silent> <Leader>. <Plug>(coc-codeaction)
-nmap <leader>rn <Plug>(coc-rename)
+" LSP Actions and code navigation
+nmap <silent> <Leader>. <cmd>lua vim.lsp.buf.code_action()<CR>
+nmap <silent> <Leader>d <cmd>lua vim.lsp.buf.definition()<CR>
+nmap <silent> <Leader>r <cmd>lua vim.lsp.buf.references()<CR>
+nmap <silent> <Leader>rn <cmd>lua vim.lsp.buf.rename()<CR>
 
 " LUA setup
 lua << EOF
