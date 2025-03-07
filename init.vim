@@ -61,6 +61,9 @@ Plug 'low-ghost/nerdtree-fugitive', { 'on':  'NERDTreeToggle' }
 " Sideline
 Plug 'preservim/tagbar'
 
+" Copilot
+Plug 'github/copilot.vim'
+
 " TreeSitter
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 
