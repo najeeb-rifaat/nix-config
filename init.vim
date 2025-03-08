@@ -30,15 +30,11 @@ Plug 'mhinz/vim-startify'
 Plug 'ryanoasis/vim-devicons'
 
 " Status line
-"Plug 'itchyny/lightline.vim'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 
 " ColorSchemes
 Plug 'flazz/vim-colorschemes'
-
-" Stntax highlight
-Plug 'sheerun/vim-polyglot'
 
 " Indentation Line
 Plug 'Yggdroot/indentLine'
