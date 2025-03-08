@@ -377,7 +377,7 @@ lua <<EOF
     ensure_installed = "all", -- Install all parsers
     highlight = {
       enable = true, -- Enables syntax highlighting
-      additional_vim_regex_highlighting = false,
+      additional_vim_regex_highlighting = true,
     },
     indent = {
       enable = true, -- Enables automatic indentation
