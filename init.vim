@@ -209,9 +209,8 @@ map <Leader>T :terminal<CR>
 tnoremap <Esc> <C-\><C-n>
 
 " Search - Setting
-nmap <C-p> :Files<CR>
+nmap <C-p> :Ag<CR>
 nmap <C-o> :Buffers<CR>
-nmap <C-s> :Ag<CR>
 
 " FZF Key Mapping
 let g:fzf_action = {
@@ -232,6 +231,8 @@ map <Leader>[ :tabprev<CR>
 nmap <silent> <Leader>. <cmd>lua vim.lsp.buf.code_action()<CR>
 nmap <silent> <Leader>d <cmd>lua vim.lsp.buf.definition()<CR>
 nmap <silent> <Leader>r <cmd>lua vim.lsp.buf.references()<CR>
+nmap <silent> <Leader>i <cmd>lua vim.lsp.buf.implementation()<CR>
+nmap <silent> <Leader>f <cmd>lua vim.lsp.buf.format()<CR>
 nmap <silent> <Leader>rn <cmd>lua vim.lsp.buf.rename()<CR>
 
 " LUA setup
