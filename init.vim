@@ -224,7 +224,6 @@ map <Leader>w :w<CR>
 map <Leader>Q :q!<CR>
 
 " Tab navigation mapping
-map <Leader>t :tabnew<CR>
 map <Leader>] :tabnext<CR>
 map <Leader>[ :tabprev<CR>
 
@@ -235,6 +234,9 @@ nmap <silent> <Leader>r <cmd>lua vim.lsp.buf.references()<CR>
 nmap <silent> <Leader>i <cmd>lua vim.lsp.buf.implementation()<CR>
 nmap <silent> <Leader>f <cmd>lua vim.lsp.buf.format()<CR>
 nmap <silent> <Leader>rn <cmd>lua vim.lsp.buf.rename()<CR>
+
+" TagBar
+map <Leader>t :TagbarToggle<CR>
 
 " LUA setup
 lua << EOF
