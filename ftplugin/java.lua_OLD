@@ -1,0 +1,46 @@
+-- Get project name for workspace
+local project_name = vim.fn.fnamemodify(vim.fn.getcwd(), ':p:h:t')
+local workspace_dir = os.getenv('HOME') .. '/.cache/jdtls/' .. project_name
+
+-- Simplified configuration
+local config = {
+    -- Basic command to start jdtls
+    cmd = {
+        'jdtls',  -- Assuming jdtls is in your PATH
+        '-data', workspace_dir
+    },
+
+    -- Find project root
+    root_dir = vim.fs.dirname(vim.fs.find({'gradlew', '.git', 'mvnw', 'pom.xml'}, { upward = true })[1]),
+
+    -- Important settings for source navigation
+    settings = {
+        java = {
+            configuration = {
+                updateBuildConfiguration = "automatic",
+            },
+            sources = {
+                organizeImports = {
+                    starThreshold = 9999,
+                    staticStarThreshold = 9999,
+                }
+            },
+            contentProvider = { preferred = 'fernflower' },
+        }
+    },
+
+    -- Enable handling of library sources
+    init_options = {
+        bundles = {},
+        extendedClientCapabilities = {
+            classFileContentsSupport = true,
+            generateToStringPromptSupport = true,
+            hashCodeEqualsPromptSupport = true,
+            advancedOrganizeImportsSupport = true,
+            advancedExtractRefactoringSupport = true
+        }
+    }
+}
+
+-- Start JDTLS
+require('jdtls').start_or_attach(config)

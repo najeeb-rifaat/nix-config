@@ -50,9 +50,12 @@ Plug 'editorconfig/editorconfig-vim'
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
 
+" Selector
+Plug 'nvim-lua/plenary.nvim'
+
 " Fuzzy finder
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-Plug 'junegunn/fzf.vim'
+Plug 'nvim-telescope/telescope.nvim'
+Plug 'nvim-telescope/telescope-ui-select.nvim'
 
 " File Manager
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
@@ -67,18 +70,22 @@ Plug 'github/copilot.vim'
 " TreeSitter
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 
-" LSP Package
+" Mason
 Plug 'williamboman/mason.nvim'
+
+" LSP Package
 Plug 'neovim/nvim-lspconfig'
 Plug 'williamboman/mason-lspconfig.nvim'
 Plug 'hrsh7th/cmp-nvim-lsp'
+Plug 'mfussenegger/nvim-jdtls'
+
+" Completion
 Plug 'hrsh7th/cmp-buffer'
 Plug 'hrsh7th/cmp-path'
 Plug 'hrsh7th/cmp-cmdline'
 Plug 'hrsh7th/nvim-cmp'
 Plug 'hrsh7th/cmp-vsnip'
 Plug 'hrsh7th/vim-vsnip'
-Plug 'nvim-lua/plenary.nvim'
 Plug 'petertriho/cmp-git'
 
 call plug#end()
@@ -209,14 +216,8 @@ map <Leader>T :terminal<CR>
 tnoremap <Esc> <C-\><C-n>
 
 " Search - Setting
-nmap <C-p> :Ag<CR>
-nmap <C-o> :Buffers<CR>
-
-" FZF Key Mapping
-let g:fzf_action = {
-    \ 'ctrl-h': 'split',
-    \ 'ctrl-v': 'vsplit'
-  \ }
+nmap <C-p> <cmd>lua require('telescope.builtin').live_grep()<CR>
+nmap <C-o> <cmd>lua require('telescope.builtin').buffers()<CR>
 
 " Buffer Control mapping
 map <Leader>w :w<CR>
@@ -243,18 +244,54 @@ require("mason-lspconfig").setup({
     automatic_installation = true,
 })
 
+local project_name = vim.fn.fnamemodify(vim.fn.getcwd(), ':p:h:t')
+local workspace_dir = os.getenv('HOME') .. '/.cache/jdtls/' .. project_name
+local lombok_path = os.getenv('HOME') .. '/.local/share/lombok.jar'
+
 require("mason-lspconfig").setup_handlers {
-    -- The first entry (without a key) will be the default handler
-    -- and will be called for each installed server that doesn't have
-    -- a dedicated handler.
-    function (server_name) -- default handler (optional)
-        require("lspconfig")[server_name].setup {}
+  -- The first entry (without a key) will be the default handler
+  -- and will be called for each installed server that doesn't have
+  -- a dedicated handler.
+  function (server_name) -- default handler (optional)
+    require("lspconfig")[server_name].setup {}
     end,
     -- Next, you can provide a dedicated handler for specific servers.
     -- For example, a handler override for the `rust_analyzer`:
     --["rust_analyzer"] = function ()
     --    require("rust-tools").setup {}
     --end
+    ["jdtls"] = function ()
+    require("lspconfig").jdtls.setup {
+      setting = {
+        java = {
+          import = {enabled = true},
+          rename = {enabled = true},
+          signatureHelp = {enabled = true},
+          completion = {
+            favoriteStaticMembers = {
+              "org.hamcrest.MatcherAssert.assertThat",
+              "org.hamcrest.Matchers.*",
+              "org.hamcrest.CoreMatchers.*",
+              "org.junit.jupiter.api.Assertions.*",
+              "java.util.Objects.requireNonNull",
+              "java.util.Objects.requireNonNullElse",
+              "org.mockito.Mockito.*"
+            }
+            }
+          }
+        },
+        init_options = {
+          bundles = {},
+          extendedClientCapabilities = {
+            classFileContentsSupport = true,
+            generateToStringPromptSupport = true,
+            hashCodeEqualsPromptSupport = true,
+            advancedOrganizeImportsSupport = true,
+            advancedExtractRefactoringSupport = true
+          }
+        }
+      }
+    end
 }
 EOF
 
@@ -367,5 +404,40 @@ lua <<EOF
       vim.diagnostic.open_float(nil, { focus = false, scope = "cursor" })
     end,
   })
+EOF
 
+" setup telescope-ui-select
+lua <<EOF
+  local builtin = require('telescope.builtin')
+  vim.keymap.set('n', '<leader>ff', builtin.find_files, { desc = 'Telescope find files' })
+  vim.keymap.set('n', '<leader>fg', builtin.live_grep, { desc = 'Telescope live grep' })
+  vim.keymap.set('n', '<leader>fb', builtin.buffers, { desc = 'Telescope buffers' })
+  vim.keymap.set('n', '<leader>fh', builtin.help_tags, { desc = 'Telescope help tags' })
+
+  require("telescope").setup {
+    extensions = {
+      ["ui-select"] = {
+        require("telescope.themes").get_dropdown {
+          -- even more opts
+        }
+
+        -- pseudo code / specification for writing custom displays, like the one
+        -- for "codeactions"
+        -- specific_opts = {
+        --   [kind] = {
+        --     make_indexed = function(items) -> indexed_items, width,
+        --     make_displayer = function(widths) -> displayer
+        --     make_display = function(displayer) -> function(e)
+        --     make_ordinal = function(e) -> string
+        --   },
+        --   -- for example to disable the custom builtin "codeactions" display
+        --      do the following
+        --   codeactions = false,
+        -- }
+      }
+    }
+  }
+  -- To get ui-select loaded and working with telescope, you need to call
+  -- load_extension, somewhere after setup function:
+  require("telescope").load_extension("ui-select")
 EOF
