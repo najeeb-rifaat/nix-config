@@ -104,12 +104,15 @@ hide_edge_borders smart
 # You can get the names of your inputs by running: swaymsg -t get_inputs
 # Read `man 5 sway-input` for more information about this section.
 
+set $laptop eDP-1
+bindswitch --reload --locked lid:on output $laptop disable
+bindswitch --reload --locked lid:off output $laptop enable
 
 # Keyboards
 input "type:keyboard" {
     repeat_delay 325
     repeat_rate 75
-    xkb_layout us,ar
+    xkb_layout us,ara
     xkb_options grp:win_space_toggle
 }
 
